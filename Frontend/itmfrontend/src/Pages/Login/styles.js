@@ -1,0 +1,71 @@
+import TextField from '@material-ui/core/TextField';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+
+const mingColor = '#387780';
+const dartmouthGreenColor = '#2D7638';
+const emeraldGreenColor = '#62C370';
+
+export const CssTextField = withStyles({
+  root: {
+    '& label.Mui-focused': {
+      color:  emeraldGreenColor,
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: emeraldGreenColor,
+    },
+    '&$checked': {
+      color: emeraldGreenColor,
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: emeraldGreenColor,
+      },
+      '&:hover fieldset': {
+        borderColor: emeraldGreenColor,
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: emeraldGreenColor,
+      },
+    },
+  },
+})(TextField);
+
+export const useStyles = makeStyles(theme => {
+  return {
+    paper: {
+      margin: theme.spacing(4, 0),
+      display: 'flex',
+      color: emeraldGreenColor,
+      flexDirection: 'column',
+      alignItems: 'center',
+      border: `5px solid ${emeraldGreenColor}`,
+      borderRadius: '2rem',
+      padding: '1.5rem 2.5rem',
+    },
+    avatar: {
+      margin: theme.spacing(3),
+      backgroundColor: emeraldGreenColor,
+      fontSize: 50,
+    },
+    form: {
+      marginTop: theme.spacing(4),
+      width: '100%',
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+      backgroundColor: emeraldGreenColor,
+      color: 'white',
+      padding: '50 50',
+    },
+    link: {
+      color: emeraldGreenColor,
+      textDecoration: 'none !important',
+    },
+    checkBox: {
+      color: `${emeraldGreenColor} !important`,
+    },
+    error: {
+      color: 'red',
+    },
+  };
+});
