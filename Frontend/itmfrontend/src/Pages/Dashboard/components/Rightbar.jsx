@@ -1,3 +1,4 @@
+import React, { useState, useEffect , useRef,  useContext} from "react";
 import {
   Link,
   Avatar,
@@ -13,6 +14,7 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
+import {investigationContext} from "../../context/GlobelInvestigationContext";
 
 const bull = (
   <Box
@@ -48,39 +50,64 @@ const useStyles = makeStyles((theme) => ({
 
 const Rightbar = () => {
   const classes = useStyles();
+  const [PoliceStationID, setPoliceStationID]=useState("");
+  const [City, setCity]=useState("");
+  const [PoliceStationLocation, setPoliceStationLocation]=useState("");
+  const [TeamName, setTeamName]=useState("");
+  const [LeaderName, setLeaderName]=useState("");
+  const [TotalAssigncase, setTotalAssigncase]=useState("");
+  const [TotalResolvedcase, setTotalResolvedcase]=useState("");
+  const [UnderInvestigation, setUnderInvestigation]=useState("");
+   
+  const { isFetching, token, Investeam, error, dispatch } = useContext(investigationContext)
+   
+  useEffect(() => {
+            
+            setPoliceStationID(Investeam.PoliceStationID);
+            setCity(Investeam.City);
+            setPoliceStationLocation(Investeam.PoliceStationLocation);
+            setTeamName(Investeam.TeamName);
+            setLeaderName(Investeam.LeaderName);
+            setTotalAssigncase(Investeam.TotalAssigncase);
+            setTotalResolvedcase(Investeam.TotalResolvedcase);
+            setUnderInvestigation(Investeam.UnderInvestigation);
+             
+        });
+  
   return (
     <Container className={classes.container}>
       <Typography className={classes.title} >
-         Team Details:
+         <span style={{color:"blue"}}>Team Details</span> 
       </Typography>
        <Typography className={classes.details}  >
-         Police_Station_ID:
+         <strong>Police_Station_ID :</strong> {PoliceStationID}
+         
       </Typography>
       <Typography className={classes.details}>
-         City:
+         <strong>City :</strong>{City}
       </Typography>
       <Typography className={classes.details}  >
-         Location:
+         <strong>Location:</strong>{PoliceStationLocation}
       </Typography>
        <Typography className={classes.details}  >
-         Team Name:
+         <strong>Team Name :</strong>{TeamName}
       </Typography>
       <Typography className={classes.details}  >
-         Leader Name:
+         <strong>Leader Name :</strong>{LeaderName}
       </Typography>
       <Typography className={classes.details}  >
-          Total Assign Cases :
+          <strong>Total Assign Cases :</strong> {TotalAssigncase}
       </Typography>
        <Typography className={classes.details}  >
-          Total Resolved Cases :
+          <strong>Total Resolved Cases :</strong>{TotalResolvedcase}
       </Typography>
       <Typography className={classes.details}  >
-          Under investigation:
+          <strong>Under investigation :</strong>{UnderInvestigation}
       </Typography>
        
       
       <Typography className={classes.title} >
-         Announcement:
+         <span style={{color:"blue"}}>Announcement </span>
       </Typography>
       <Card sx={{ minWidth: 275 }}>
       <CardContent>

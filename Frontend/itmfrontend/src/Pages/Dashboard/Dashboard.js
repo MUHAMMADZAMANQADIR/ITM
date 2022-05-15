@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import Rightbar from "./components/Rightbar";
 import Footer from "../Footer/Footer"
 import {Link} from 'react-router-dom';
+import Mainadmin from "../adminmain/mainadmin"
 const useStyles = makeStyles((theme) => ({
   right: {
     [theme.breakpoints.down("sm")]: {
@@ -24,7 +25,7 @@ const Dashboard = () => {
           <Leftbar />
         </Grid>
         <Grid item sm={7} xs={10}>
-          <Feed />
+          <Mainadmin /> 
         </Grid>
         <Grid item sm={3} className={classes.right}>
           <Rightbar />

@@ -1,6 +1,6 @@
 const places = [
   {
-    title: 'Crime Pattern Clustering',
+    title: 'Identify through Pattern ',
     description:
       "On many occasions, police encounter serial crimes. Using its accurate and powerful machine learning model, crime pattern clustering allows the investigation team to investigate the crime by searching past cases for similar crime patterns and potentially identifying the criminal.",
     imageUrl: process.env.PUBLIC_URL + '/assets/Crime_cluster_Blog.jpg',

@@ -8,26 +8,31 @@ import Updatespecificcase from "./Pages/CrimeCase/updatespecificcase"
 import Callsheduler from "./Pages/Scheduler/Callsheduler"
 import Searching from "./Pages/Searching/mainsearching";
 import Similarcrime from "./Pages/Similarcrime/Similarcrime"
+import Setting from "./Pages/Setting/Setting"
 import Videocall from  "./Pages/Video-call/Videocall.js"
-import Chatpage from "./Pages/Chat/Chatpage";
+import { InvesContextProvider } from "./Pages/context/GlobelInvestigationContext";
+import { ContextProvider } from './Pages/Video-call/Context.js';
 function App() {
   return (
     <Router>    
         <Routes>
+        
           <Route exact path="/" element={<Home/> }></Route>
-          <Route exact path="/loginpage" element={<Login/> }></Route>
-          <Route exact path="/dashboard" element={<Dashboard/>}></Route>
-          <Route exact path="/allCases" element={<CrimeCases/>}></Route>
+          <Route exact path="/loginpage" element={<InvesContextProvider><Login/></InvesContextProvider> }></Route>
+           
+          <Route exact path="/dashboard" element={<InvesContextProvider><Dashboard/></InvesContextProvider>}></Route>
+          <Route exact path="/setting" element={<InvesContextProvider><Setting/></InvesContextProvider>}></Route>
+          <Route exact path="/allCases" element={<InvesContextProvider><CrimeCases/></InvesContextProvider>}></Route>
           <Route exact path="/schedulecall" element={<Callsheduler/>}></Route>
-          <Route exact path="/vediocall" element={<Videocall/>}></Route>
-          <Route exact path="/specificcase" element={<SpecificCrimeCase/>}></Route>
-          <Route exact path="/updatecase" element={<Updatespecificcase/>}></Route>
-          <Route exact path="/criminaldata" element={<Searching/>}></Route>
-          <Route exact path="/similarcrime" element={<Similarcrime/>}></Route>
-          <Route exact path="/setting" element={<Dashboard/>}></Route>
-          <Route exact path="/Chat" element={<Chatpage/>}></Route>
-          <Route exact path="/logout" element={<Dashboard/>}></Route>
+          <Route exact path="/vediocall" element={<ContextProvider><Videocall/></ContextProvider>}></Route>
+          <Route exact path="/specificcase" element={<InvesContextProvider><SpecificCrimeCase/></InvesContextProvider>}></Route>
+          <Route exact path="/updatecase" element={<InvesContextProvider><Updatespecificcase/></InvesContextProvider>}></Route>
+          <Route exact path="/criminaldata" element={<InvesContextProvider><Searching/></InvesContextProvider>}></Route>
+          <Route exact path="/similarcrime" element={<InvesContextProvider><Similarcrime/></InvesContextProvider>}></Route>
           
+          <Route exact path="/logout" element={<Dashboard/>}></Route>
+           
+           
         </Routes>
     </Router>
   );

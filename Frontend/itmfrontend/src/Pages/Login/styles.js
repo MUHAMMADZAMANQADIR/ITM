@@ -3,37 +3,48 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 const mingColor = '#387780';
 const dartmouthGreenColor = '#2D7638';
-const emeraldGreenColor = '#62C370';
+const emeraldGreenColor = '#00c9ed';
 
 export const CssTextField = withStyles({
   root: {
     '& label.Mui-focused': {
       color:  emeraldGreenColor,
+      fontfamily: 'lucida sans',
     },
     '& .MuiInput-underline:after': {
       borderBottomColor: emeraldGreenColor,
+      fontfamily: 'lucida sans',
     },
     '&$checked': {
       color: emeraldGreenColor,
+      fontfamily: 'lucida sans',
     },
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
         borderColor: emeraldGreenColor,
+        fontfamily: 'lucida sans',
       },
       '&:hover fieldset': {
         borderColor: emeraldGreenColor,
+        fontfamily: 'lucida sans',
+        
       },
       '&.Mui-focused fieldset': {
         borderColor: emeraldGreenColor,
+        fontfamily: 'lucida sans',
       },
+      '&::placeholder':{
+        borderColor: emeraldGreenColor,
+      }
+     
     },
   },
 })(TextField);
 
-export const useStyles = makeStyles(theme => {
+export const useSty = makeStyles(theme => {
   return {
     paper: {
-      margin: theme.spacing(4, 0),
+      margin: theme.spacing(0, 0),
       display: 'flex',
       color: emeraldGreenColor,
       flexDirection: 'column',

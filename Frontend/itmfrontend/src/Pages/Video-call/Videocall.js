@@ -4,7 +4,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import VideoPlayer from './components/VideoPlayer';
 import Sidebar from './components/Sidebar';
 import Notifications from './components/Notifications';
-
+import ScreenRecording from './components/screenrecorder'
 const useStyles = makeStyles((theme) => ({
     appBar: {
         borderRadius: 15,
@@ -43,12 +43,21 @@ const Videocall = () => {
                 }
                 position="static"
                 color="inherit">
-                <Typography variant="h2" align="center">Video Chat</Typography>
+                <Typography variant="h2" align="center">Record Testimony</Typography>
             </AppBar>
             <VideoPlayer/>
             <Sidebar>
                 <Notifications/>
+                 <ScreenRecording
+                    screen={true}
+                    audio={true}
+                    video={true}
+                    downloadRecordingPath="Screen_Recording_Demo"
+                    downloadRecordingType="mp4"
+                    ></ScreenRecording>
             </Sidebar>
+            
+
         </div>
     );
 };

@@ -14,11 +14,11 @@ const Footer = () => {
             <div className='footer__intro f__item'>
                 <Link to='/' className='footer__link'>
                 <h1>
-                E-MUKHBIR
+                CRIS
                 </h1>
                 </Link>
                 
-                E-MUKHBIR is a crime reporting website and app. It provide online crime reporting features to users. With eveidence attachement and forensic of the evidence. It also provide complains services againt police stations and police officers.   
+                Crime Reporting and Investigation System is a crime reporting website and app. It provide online crime reporting features to users. With eveidence attachement and forensic of the evidence. It also provide complains services againt police stations and police officers.   
             </div>
             <div className='footer__services f__item'>
                 <div >
@@ -82,16 +82,16 @@ const Footer = () => {
                     Link to our social <br /> media accounts
                 </div>
                 <div className='social__links'>
-                    <a href="https://web.facebook.com/usmany26/" target="_blank" >
+                    <a href="" target="_blank" >
                     <AiFillFacebook className='social__fb'/>
                     </a>
-                    <a href="https://www.instagram.com/usmany26/" target="_blank" >
+                    <a href=" " target="_blank" >
                     <AiFillInstagram className='social__in'/>
                     </a>
-                    <a href="https://twitter.com/usmany26" target="_blank" >
+                    <a href=" " target="_blank" >
                     <FaTwitter className='social__tw'/>
                     </a>
-                    <a href="https://www.linkedin.com/in/usman-yousaf-88449a204/" target="_blank" >
+                    <a href="" target="_blank" >
                     <AiFillLinkedin className='social__li'/>
                     </a>
                 </div>

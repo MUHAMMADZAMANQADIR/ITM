@@ -14,6 +14,8 @@ import {
   Tooltip,
 
 } from "@material-ui/core";
+import DeleteIcon from '@mui/icons-material/Delete';
+import SendIcon from '@mui/icons-material/Send';
 import { styled } from '@mui/material/styles';
 import { Add as AddIcon } from "@material-ui/icons";
 import { useState } from "react";
@@ -52,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
   item: {
     marginBottom: theme.spacing(3),
   },
+  
 }));
 
 function Alert(props) {
@@ -89,32 +92,35 @@ const Add = () => {
               />
             </div>
             <div className={classes.item}>
+            <div style={{marginBottom: 3 , marginTop: '-10px' }}>
+            <label  for="NewsType">News Type: </label>
+            <select name="NewsType" >
+                <option value="Murder">Murder</option>
+                <option value="Rape">Rape</option>
+                <option value="Kidnapping">Kidnapping</option>
+                <option value="Robbery">Robbery</option>
+                <option value="Missing">Missing</option>
+                <option value="Other">Other</option>
+            </select>
+            </div>
               <TextField
                 id="outlined-multiline-static"
                 multiline
                 rows={4}
-                defaultValue="Write Description..."
                 variant="outlined"
                 label="Description"
                 size="small"
                 style={{ width: "100%" }}
               />
             </div>
-            <div>
-               <Stack direction="row" alignItems="center" spacing={2}>
+            <div direction="row" alignItems="center" spacing={2}>
                     <label htmlFor="contained-button-file">
                       <Input accept="image/*" id="contained-button-file" multiple type="file" />
-                      <Button variant="contained" component="span">
+                      <Button variant="contained" color="secondary">
                         Upload
                       </Button>
                     </label>
-                    <label htmlFor="icon-button-file">
-                      <Input accept="image/*" id="icon-button-file" type="file" />
-                      <IconButton color="primary" aria-label="upload picture" component="span">
-                        <PhotoCamera />
-                      </IconButton>
-                    </label>
-                  </Stack>
+                 
             </div>
             <div className={classes.item} style={{marginTop:"5px"}}>
               <TextField select label="Visibility" value="Public">
@@ -122,35 +128,21 @@ const Add = () => {
                 <MenuItem value="Private">Only officer</MenuItem>
               </TextField>
             </div>
-
-            <div className={classes.item}>
-              <FormLabel component="legend">Who can comment?</FormLabel>
-              <RadioGroup>
-                <FormControlLabel
-                  value="Everybody"
-                  control={<Radio size="small" />}
-                  label="Everybody"
-                />
-                <FormControlLabel
-                  value="No One"
-                  control={<Radio size="small" />}
-                  label="NoBody"
-                />
-              </RadioGroup>
-            </div>
             <div className={classes.item}>
               <Button
                 variant="outlined"
                 color="primary"
                 style={{ marginRight: 20 }}
                 onClick={() => setOpenAlert(true)}
+                endIcon={<SendIcon />}
               >
-                Create
+                Change
               </Button>
               <Button
                 variant="outlined"
                 color="secondary"
                 onClick={() => setOpen(false)}
+                startIcon={<DeleteIcon />}
               >
                 Cancel
               </Button>

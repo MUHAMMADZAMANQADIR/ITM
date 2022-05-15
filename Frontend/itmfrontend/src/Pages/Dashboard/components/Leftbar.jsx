@@ -4,13 +4,14 @@ import {
   List,
   ExitToApp,
   Home,
-  Person,
   PhotoCamera,
-  PlayCircleOutline,
   Settings,
   Storefront,
-  TabletMac,
 } from "@material-ui/icons";
+import ChatIcon from '@mui/icons-material/Chat';
+import ScheduleIcon from '@mui/icons-material/Schedule';
+import StorageIcon from '@mui/icons-material/Storage';
+import AssignmentIcon from '@mui/icons-material/Assignment';
 import { Link}   from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -63,19 +64,16 @@ const Leftbar = () => {
         <Button className={classes.text} component={Link} to='/allCases'>List of cases</Button>
       </div>
        <div className={classes.item}>
-        <Storefront className={classes.icon} />
+        <ScheduleIcon className={classes.icon} />
         <Button className={classes.text} component={Link} to='/schedulecall'>schedule call</Button>
       </div>
       <div className={classes.item}>
         <PhotoCamera className={classes.icon} />
         <Button className={classes.text} component={Link} to='/vediocall'>Video call</Button>
       </div>
+       
       <div className={classes.item}>
-        <PhotoCamera className={classes.icon} />
-        <Button className={classes.text} component={Link} to='/Chat'>Chat</Button>
-      </div>
-      <div className={classes.item}>
-        <Bookmark className={classes.icon} />
+        <StorageIcon className={classes.icon} />
         <Button className={classes.text} component={Link} to='/criminaldata'>Criminal Data</Button>
       </div>
       <div className={classes.item}>

@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect , useRef,  useContext} from "react";
+
 import { AccountCircle as AccountCircleIcon } from '@material-ui/icons';
+import { Wave } from 'react-animated-text';
 import {
   Avatar,
   Grid,
@@ -11,22 +13,100 @@ import {
   Checkbox,
   Typography,
 } from '@material-ui/core';
+import axios from 'axios'
 import { Link as RouterLink } from "react-router-dom";
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import InputAdornment from '@mui/material/InputAdornment';
-import { CssTextField, useStyles } from './styles';
+import { TextField } from '@mui/material';
+import { CssTextField, useSty } from './styles';
 import "./login.css";
-
+import { BsChevronDoubleRight } from 'react-icons/bs'
+import { useNavigate } from "react-router-dom";
+import {investigationContext} from "../context/GlobelInvestigationContext"
 const SignInForm = () => {
-  const classes = useStyles();
-  const [Uname, setUName] = useState("");
-  const [password, setPassword] = useState("");
+  const classes = useSty();
+  const [Username, setUsername] = useState("");
+  const [UserPassword, setPassword] = useState("");
    
+  const { isFetching, token, Investeam, error, dispatch } = useContext(investigationContext)
+  const navigate = useNavigate()
+  const handleUsernameInput = event => {
+        setUsername(event.target.value);
+  };
+   const handlePasswordInput = event => {
+        setPassword(event.target.value);
+  };
+  const handleLogin = async (e) => {
+        
+        e.preventDefault()
+        const UserName = Username 
+        const Password = UserPassword 
+        const body = JSON.stringify( { UserName, Password })
+        console.log(body);
+        const config = {
+            headers: {
+                'Content-Type':'application/json'
+            }
+        }
+        try {
+            dispatch({ type: "LOGIN_START" })
+            const res = await axios.post("http://localhost:5000/api/investigationteams/logininvestigationteam", body, config)
+            dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.investigationTeam })
+            
+            console.log(res.data.investigationTeam)
+            navigate("/dashboard");
+        } catch (err) {
+            dispatch({ type: "LOGIN_FAILURE", payload:err})
+            console.log(err)
+        }
+    }
 
   return (
     <div className="ParentDiv">
-    <Container component='main' maxWidth='xs' >
-      <CssBaseline />
+    <div className="Leftchild">
+      <div className="services">
+      
+      <Typography style={{color: '#00c9ed' , fontweight: 'bold', fontSize: '2.7rem', marginBottom: '4px'}}>
+        
+         <Wave  text="What we can do?" effect="verticalFadeIn" speed="10" effectChange={"#FF0000"} />
+      </Typography>
+       
+       <div className='services__item'>
+          <BsChevronDoubleRight className='services__icon'/>
+        Clustering cases with a similar crime pattern.
+
+        </div>
+        <div className='services__item'>
+            <BsChevronDoubleRight className='services__icon'/>
+                Predicting a criminal using serial crime patterns.
+        </div>
+        <div className='services__item'>
+          <BsChevronDoubleRight className='services__icon'/>
+            Fast and precise face detection and identification using a single/Multi face image.
+        </div>
+        <div className='services__item'>
+            <BsChevronDoubleRight className='services__icon'/>
+              Scheduled and Modify a video call.
+         </div>
+          <div className='services__item'>
+            <BsChevronDoubleRight className='services__icon'/>
+              Retrieve the record of a criminal from database .
+          </div>
+          <div className='services__item'>
+            <BsChevronDoubleRight className='services__icon'/>
+               Classifying fake and factual evidence.
+          </div>
+          <div className='services__item'>
+            <BsChevronDoubleRight className='services__icon'/>
+              Separating genuine cases from fake cases.
+          </div>
+           <div className='services__item'>
+            <BsChevronDoubleRight className='services__icon'/>
+               Identifying if the uploaded image, audio, or video has been tampered with.
+          </div>
+       </div>         
+    </div>
+    <div className="Rightchild">
+        <Container component='main' maxWidth='xs' >
+       
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <AccountCircleIcon style={{ fontSize: 45 }} />
@@ -34,15 +114,20 @@ const SignInForm = () => {
         <Typography component='h1' variant='h4'>
           Sign in
         </Typography>
-        <form className={classes.form} >
-          <CssTextField
+        <form>
+           
+           <CssTextField
             name='email'
-            label='Email Address'
+            label='Email'
+            type='email'
             variant='outlined'
             margin='normal'
-            autoComplete='email'
             fullWidth
             required
+            focused
+            
+            onChange={handleUsernameInput}
+            autoComplete='current-password'
           />
           <CssTextField
             name='password'
@@ -51,7 +136,10 @@ const SignInForm = () => {
             variant='outlined'
             margin='normal'
             fullWidth
+            focused
             required
+             
+            onChange={handlePasswordInput}
             autoComplete='current-password'
           />
 
@@ -80,13 +168,14 @@ const SignInForm = () => {
             fullWidth
             variant='contained'
             className={classes.submit}
-            component={RouterLink} to='/dashboard'
+            onClick={handleLogin}  
           >
             Sign In
           </Button>
         </form>
       </div>
     </Container>
+    </div>
     </div>
    
   );

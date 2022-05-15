@@ -6,7 +6,8 @@ import Navbar from "../Dashboard/components/Navbar";
 import Rightbar from "../Dashboard/components/Rightbar";
 import Footer from "../Footer/Footer"
 import Casetemplate from "../CrimeCase/Casetemplates"
-import {Link} from 'react-router-dom';
+import { useState } from 'react';
+import caseinfo from './Casedb'
 const useStyles = makeStyles((theme) => ({
   right: {
     [theme.breakpoints.down("sm")]: {
@@ -17,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CrimeCases = () => {
   const classes = useStyles();
+  const [caselist , updatecase]=useState([1])
   return (
     <div>
       <Navbar />
@@ -25,7 +27,22 @@ const CrimeCases = () => {
           <Leftbar />
         </Grid>
         <Grid item sm={7} xs={10}>
-           <Casetemplate/>
+            {
+            caseinfo.map((news)=>{
+              return(
+                <Grid key={news.key} sm={6} xs={12}>
+                      <Casetemplate  style={{marginRight: '10px' }}
+                        id={news.Caseid}
+                        description={news.description}
+                        evidence={news.Image1}
+                        date={news.date}
+                      ></Casetemplate> 
+                </Grid>
+              )
+            })
+            
+            }    
+            
         </Grid>
         <Grid item sm={3} className={classes.right}>
           <Rightbar />

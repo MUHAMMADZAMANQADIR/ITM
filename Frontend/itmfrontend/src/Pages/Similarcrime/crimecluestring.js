@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, TextField, Typography ,Button} from '@material-ui/core';
-
+import { width } from "@mui/material/node_modules/@mui/system";
+var axios = require('axios');
 const useStyles = makeStyles((theme) => ({
   button:{
       size:"large",
@@ -17,6 +18,27 @@ const useStyles = makeStyles((theme) => ({
 export default function CrimeCluestring() {
   
   const classes = useStyles();
+  const [name, setname] = useState("");
+  const [cnic, setcnic] = useState(0);
+  const [address, setaddress] = useState("");
+  const [description, setdescription] = useState("");
+  const [casetype, setcasetype] = useState("");
+  const [inputtext , setinputtext]=useState()
+  const baseURL = "http://localhost:8000";
+  
+  const getSimilarcases = async () => {
+  axios.get(`${baseURL}/similarcases/${inputtext}`)
+  .then(function (response) {
+    const cdata= response.data
+    console.log(cdata)
+  })
+  .catch(function (error) {
+    console.log(error);
+  });  
+  };
+  const handleInputChange = event => {
+        setinputtext(event.target.value);
+  };
   return (
   <div style={{marginTop:"70px" , marginLeft: "10px"}}>
   
@@ -35,13 +57,15 @@ export default function CrimeCluestring() {
   <Box class="card-body">
       <div>
         <label >Enter Description </label>
-            <textarea
-                name="details"
-                rows="7" cols="10"
-                name='details'
-                minLength= "100"
-                maxLength='5000'
-            />
+          <TextField
+            variant="outlined"
+            multiline
+            rows={7}
+            maxRows={10}
+            style={{marginBottom :'10px', marginTop: "5px" , width: "100%" }}
+            value={inputtext}
+            onChange={handleInputChange}
+          />
         </div>
         <Button 
           variant="contained" 
@@ -50,7 +74,10 @@ export default function CrimeCluestring() {
           maxWidth: "70px",
           maxHeight: "70px",
           align: "center",
-        }}>Upload</Button>
+          
+        }}
+        onClick={getSimilarcases()}
+        >Upload</Button>
   </Box>
 </div>
 </div>

@@ -9,8 +9,9 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Cancel, Mail, Notifications, Search } from "@material-ui/icons";
+import Notification from "../../Notifications/Notification"
 import { useState } from "react";
-
+const icon= process.env.PUBLIC_URL + '/assets/icon.png'
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     display: "flex",
@@ -18,6 +19,8 @@ const useStyles = makeStyles((theme) => ({
   },
   logoLg: {
     display: "none",
+    hight:"40px",
+    width:"40px",
     [theme.breakpoints.up("sm")]: {
       display: "block",
     },
@@ -27,43 +30,29 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       display: "none",
     },
-  },
-  search: {
-    display: "flex",
-    alignItems: "center",
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    borderRadius: theme.shape.borderRadius,
-    width: "50%",
-    [theme.breakpoints.down("sm")]: {
-      display: (props) => (props.open ? "flex" : "none"),
-      width: "70%",
-    },
-  },
+  }, 
   input: {
     color: "white",
     marginLeft: theme.spacing(1),
   },
-  cancel: {
-    [theme.breakpoints.up("sm")]: {
-      display: "none",
-    },
-  },
-  searchButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up("sm")]: {
-      display: "none",
-    },
-  },
+  
   icons: {
     alignItems: "center",
     display: (props) => (props.open ? "none" : "flex"),
   },
-  badge: {
-    marginRight: theme.spacing(2),
-  },
+  notificationtogglebtn :{
+    background: "white",
+    width: "35px",
+    height: "35px",
+    border:"5px solid #ddd",
+    borderradius: "5px",
+    textalign: "center",
+    alignContent: "center",
+    left:"77.8%",
+     
+     
+}
+  
 }));
 
 const Navbar = () => {
@@ -72,32 +61,15 @@ const Navbar = () => {
   return (
     <AppBar position="fixed">
       <Toolbar className={classes.toolbar}>
-        <Typography variant="h6" className={classes.logoLg}>
-          IT Panel
-        </Typography>
-        <Typography variant="h6" className={classes.logoSm}>
-          LAMA
-        </Typography>
-        <div className={classes.search}>
-          <Search />
-          <InputBase placeholder="Search..." className={classes.input} />
-          <Cancel className={classes.cancel} onClick={() => setOpen(false)} />
-        </div>
+        <img src={icon} className={classes.logoLg}/>
         <div className={classes.icons}>
-          <Search
-            className={classes.searchButton}
-            onClick={() => setOpen(true)}
-          />
-          <Badge badgeContent={4} color="secondary" className={classes.badge}>
-            <Mail />
-          </Badge>
-          <Badge badgeContent={2} color="secondary" className={classes.badge}>
-            <Notifications />
-          </Badge>
-          <Avatar
-            alt="Remy Sharp"
-            src="https://images.pexels.com/photos/8647814/pexels-photo-8647814.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-          />
+            <div className={classes.notificationtogglebtn} style={{marginRight: "15px", marginTop: "5px" }}>
+               <Notification />
+            </div>
+                <Avatar
+                  alt="Remy Sharp"
+                  src="https://images.pexels.com/photos/8647814/pexels-photo-8647814.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                />
         </div>
       </Toolbar>
     </AppBar>
