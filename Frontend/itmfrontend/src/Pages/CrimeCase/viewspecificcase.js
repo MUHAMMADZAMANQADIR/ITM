@@ -7,6 +7,7 @@ import Rightbar from "../Dashboard/components/Rightbar";
 import Footer from "../Footer/Footer"
 import CrimeCases from "./Reportedcrime" 
 import {Link} from 'react-router-dom';
+import {IDConsumer} from "../Globelvariable/Globelvariable"
 const useStyles = makeStyles((theme) => ({
   right: {
     [theme.breakpoints.down("sm")]: {
@@ -18,6 +19,8 @@ const useStyles = makeStyles((theme) => ({
 const SpecificCrimeCase = () => {
   const classes = useStyles();
   return (
+    <IDConsumer>
+    {({ ID , ReportType , User }) =>
     <div>
       <Navbar />
       <Grid container>
@@ -25,7 +28,7 @@ const SpecificCrimeCase = () => {
           <Leftbar />
         </Grid>
         <Grid item sm={7} xs={10}>
-           <CrimeCases/>
+           <CrimeCases ID={ID} ReportType={ReportType} User={User}/>
         </Grid>
         <Grid item sm={3} className={classes.right}>
           <Rightbar />
@@ -36,6 +39,9 @@ const SpecificCrimeCase = () => {
       <Footer ></Footer>
       </div>
     </div>
+    }
+    
+    </IDConsumer>
   );
 };
 

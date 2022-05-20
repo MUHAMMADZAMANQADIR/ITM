@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect , useRef,  useContext} from "react";
 import { AiFillStar } from "react-icons/ai"
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -9,15 +9,15 @@ import AddIcon from '@mui/icons-material/Add';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
-
+import {investigationContext} from "../../Pages/context/GlobelInvestigationContext";
+import axios from 'axios'
 const Input = styled('input')({
   display: 'none',
 });
-const  UpdateEvidence=()=>{
+const  UpdateEvidence=(props)=>{
     const [openImage, setopenImage] = useState(false);
     const [openvideo, setopenvideo] = useState(false);
-     
-
+  
 const Addimage = () => {
     return(
         <div style={{marginTop: "10px" , display: 'flex', justifyContent: 'center'}}>
@@ -97,6 +97,9 @@ return(
            openvideo ? Addvideo() :''
        }
     </div>
+    <form className='report__form'>
+            <Button style={{backgroundColor : "#4CAF50" , marginTop : 20}}  >Update</Button> 
+      </form>
     </>
  )
 } 

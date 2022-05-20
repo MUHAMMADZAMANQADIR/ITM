@@ -12,6 +12,8 @@ import Setting from "./Pages/Setting/Setting"
 import Videocall from  "./Pages/Video-call/Videocall.js"
 import { InvesContextProvider } from "./Pages/context/GlobelInvestigationContext";
 import { ContextProvider } from './Pages/Video-call/Context.js';
+import  {CasesContextProvider} from "./Pages/CasesContext/CasesContext"
+import {IdProvider} from "./Pages/Globelvariable/Globelvariable"
 function App() {
   return (
     <Router>    
@@ -22,15 +24,17 @@ function App() {
            
           <Route exact path="/dashboard" element={<InvesContextProvider><Dashboard/></InvesContextProvider>}></Route>
           <Route exact path="/setting" element={<InvesContextProvider><Setting/></InvesContextProvider>}></Route>
-          <Route exact path="/allCases" element={<InvesContextProvider><CrimeCases/></InvesContextProvider>}></Route>
+        
+          <Route exact path="/allCases" element={<IdProvider><InvesContextProvider><CrimeCases/></InvesContextProvider></IdProvider>}></Route>
+          
           <Route exact path="/schedulecall" element={<Callsheduler/>}></Route>
-          <Route exact path="/vediocall" element={<ContextProvider><Videocall/></ContextProvider>}></Route>
-          <Route exact path="/specificcase" element={<InvesContextProvider><SpecificCrimeCase/></InvesContextProvider>}></Route>
-          <Route exact path="/updatecase" element={<InvesContextProvider><Updatespecificcase/></InvesContextProvider>}></Route>
+          <Route exact path="/vediocall" element={<InvesContextProvider><ContextProvider><Videocall/></ContextProvider></InvesContextProvider>}></Route>
+          <Route exact path="/specificcase" element={<IdProvider><InvesContextProvider><SpecificCrimeCase/></InvesContextProvider></IdProvider>}></Route>
+          <Route exact path="/updatecase" element={<IdProvider><InvesContextProvider><Updatespecificcase/></InvesContextProvider></IdProvider>}></Route>
           <Route exact path="/criminaldata" element={<InvesContextProvider><Searching/></InvesContextProvider>}></Route>
           <Route exact path="/similarcrime" element={<InvesContextProvider><Similarcrime/></InvesContextProvider>}></Route>
           
-          <Route exact path="/logout" element={<Dashboard/>}></Route>
+          <Route exact path="/logout" element={<Home/>}></Route>
            
            
         </Routes>

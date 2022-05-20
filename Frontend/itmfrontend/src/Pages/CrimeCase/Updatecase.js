@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect , useRef,  useContext} from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { AiFillStar } from "react-icons/ai"
 import CardMedia from '@mui/material/CardMedia';
@@ -17,32 +17,23 @@ import caseinfo from './Casedb'
 import UpdateEvidence from "./UpdateEvidence"
 import AddTestimony from "./AddTestimony"
 import Genratereport from "./Generatereport"
+import {investigationContext} from "../../Pages/context/GlobelInvestigationContext";
+import {IDConsumer} from "../Globelvariable/Globelvariable"
 const steps = ['Update Evidence', 'Add Testimony','Generate report'];
 
  
 
-const Updatecase = () => {
+const Updatecase = (props) => {
      
+    const {Investeam, error } = useContext(investigationContext)
     const video=process.env.PUBLIC_URL + '/assets/No Money_ No Tension.mp4'
     const [activeStep, setActiveStep] = React.useState(0);
     const [completed, setCompleted] = React.useState({});
-    const [values, setValues] = useState({
-        Caseid: '',
-        name: '',
-        phone: '',
-        CNIC: '',
-        city: '',
-        policeStation: '',
-        Location:'',
-        crimeType: '',
-        date: '',
-        audio: '',
-        video: '',
-        image: '',
-        description: '',
-        status: '',
-        
-    })
+    const [ReportType , setReportType]=useState("") 
+    const [FinalRemarks , setFinalRemarks]=useState("") 
+    const [closingdate , setclosingdate]=useState("")
+    
+
     const totalSteps = () => {
       return steps.length;
     };
@@ -67,10 +58,12 @@ const Updatecase = () => {
  
  
 return (
+  <IDConsumer>
+    {({ ID,ReportType ,User , Caseid}) => ( 
     <>
-          
+    {console.log("ID---", ID, "ReportType---", ReportType , "USer-----", User)} {setReportType(ReportType)}
     <Typography style={{marginTop: "70px", marginLeft: "7px" ,fontSize: '2rem',}}>Update case 
-         <span style={{fontSize: '1rem',}}> ID: (124-toba-c96)</span>
+         <span style={{fontSize: '1rem',}}> ID:{Caseid}</span>
     </Typography>
 
         <Box sx={{ width: '100%' }}>
@@ -87,20 +80,25 @@ return (
         { (
         <React.Fragment>
             {
-              activeStep ==0 ? <UpdateEvidence/>
-            : activeStep ==1 ? <AddTestimony/>: <Genratereport/>
+              //ID MEAN CASES ID USER MEAN USER ID
+              activeStep ==0 ? <UpdateEvidence ID={ID} ReportType={ReportType} User={User} investigationteam={Investeam._id}/>
+            : activeStep ==1 ? <AddTestimony ID={ID} ReportType={ReportType} User={User} investigationteam={Investeam._id} />
+            : <Genratereport   ID={ID} ReportType={ReportType} User={User} investigationteam={Investeam._id} />
             } 
         <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
         <Button
-                color="inherit"
+               style={{marginLeft: 100 }}
+                
                 disabled={activeStep === 0}
                 onClick={handleBack}
                 sx={{ mr: 1 }}
               >
                 Back
         </Button>
-              <Box sx={{ flex: '1 1 auto' }} />
-              <Button onClick={handleNext} sx={{ mr: 1 }}>
+        <Box sx={{ flex: '1 1 auto' }} />
+              <Button onClick={handleNext} sx={{ mr: 1 }}
+               style={{marginRight: 100}}
+              >
                 Next
               </Button>
               {activeStep !== steps.length &&
@@ -111,11 +109,10 @@ return (
         )}
       </div>
     </Box>
-      <form className='report__form'>
-            <Button style={{backgroundColor : "#4CAF50" , marginBottom : 10}}   
-             component={Link} to='/updatecase'>Update</Button> 
-      </form>
-        </>
+    </>
+    )}
+    
+  </IDConsumer>
         
     )
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect , useRef,  useContext} from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { AiFillStar } from "react-icons/ai"
 import CardMedia from '@mui/material/CardMedia';
@@ -14,40 +14,120 @@ import Imageevidencetemplate from './imageevidencetemplate'
 import './Report.css'
 import Grid from '@mui/material/Grid';
 import caseinfo from './Casedb'
+import axios from 'axios'
 const steps = ['Reporter information', 'Crime Details', 'Attached Evidence' ,'Progress Report'];
 
  
 
-const Report = () => {
+const Report = (props) => {
+  
+  const [id , setid]=useState("");
+  useEffect(() => {
+    {
+        setReportedtype(props.ReportType)
+        console.log("-------Report id--------")
+        props.ReportType =="FIR" ? callandsetvalueFIR()
+        : props.ReportType =="CRIME REPORT" ? callandsetvalueCRIMEREPORT()
+        : callandsetvalueMukhbir()
+    } 
+    
+  }, []);
+
+  const callandsetvalueFIR = () => {
+        let url = `http://localhost:5000/api/fir/${props.ID}`;
+    axios
+      .get(url)
+      .then(function (response) {
+        console.log(response.data);
+        setname(response.data.firstName.concat(" ").concat(response.data.lastName))
+        setphone(response.data.phone)
+        setpoliceStation(response.data.policeStation)
+        setcity(response.data.city)
+        setCNIC(response.data.CNIC)
+        setcrimeType(response.data.crimeType)
+        setdescription(response.data.description)
+        setstatus(response.data.status)
+        setsubject(response.data.subject)
+        setzipPosta(response.data.zipPostalCode)
+        setCaseid(response.data.caseID)
+        setdate(response.data.ReportedDate)
+        setFIRAgainst(response.data.firAgainst)
+        setLocation(response.data.firAgainst.address)
+         
+      })
+      .catch((error) => console.log(error));
+  };
+  const callandsetvalueCRIMEREPORT = () => {
+    let url = `http://localhost:5000/api/crimeReported/${props.ID}`;
+    axios
+      .get(url)
+      .then(function (response) {
+        console.log(response.data);
+        setname(response.data.firstName.concat(" ").concat(response.data.lastName))
+        setphone(response.data.phone)
+        setpoliceStation(response.data.policeStation)
+        setcity(response.data.city)
+        setCNIC(response.data.CNIC)
+        setcrimeType(response.data.crimeType)
+        setdescription(response.data.description)
+        setstatus(response.data.status)
+        setsubject(response.data.subject)
+        setzipPosta(response.data.zipPostalCode)
+        setCaseid(response.data.caseID)
+        setdate(response.data.ReportedDate)
+        setLocation(response.data.location)
+        setFIRAgainst(response.data.firAgainst)
+
+      })
+      .catch((error) => console.log(error));
+  };
+  const callandsetvalueMukhbir = () => {
+    let url = `http://localhost:5000/api/mukhbir/${props.ID}`;
+    axios
+      .get(url)
+      .then(function (response) {
+        console.log(response.data);
+        setpoliceStation(response.data.policeStation)
+        setcity(response.data.city)
+        setcrimeType(response.data.crimeType)
+        setdescription(response.data.description)
+        setstatus(response.data.status)
+        setsubject(response.data.subject)
+        setzipPosta(response.data.zipPostalCode)
+        setCaseid(response.data.caseID)
+        setdate(response.data.ReportedDate)
+        setLocation(response.data.location)
+      })
+      .catch((error) => console.log(error));
+  };
      
-    const video=process.env.PUBLIC_URL + '/assets/No Money_ No Tension.mp4'
+    const Video=process.env.PUBLIC_URL + '/assets/No Money_ No Tension.mp4'
     const [activeStep, setActiveStep] = React.useState(0);
     const [completed, setCompleted] = React.useState({});
-    const [Reportedtype, setReportedtype]=useState("FIR")
-    const [values, setValues] = useState({
-        Caseid: '',
-        name: '',
-        phone: '',
-        CNIC: '',
-        city: '',
-        policeStation: '',
-        Location:'',
-        crimeType: '',
-        date: '',
-        audio: '',
-        video: '',
-        image: '',
-        description: '',
-        status: '',
-        FIRAgainst:{  
-        firstName: "",
+    const [Reportedtype, setReportedtype]=useState("");
+    const [name, setname]=useState("Anonymous");
+    const [phone, setphone]=useState("Anonymous");
+    const [CNIC, setCNIC]=useState("Anonymous");
+    const [city, setcity]=useState("Anonymous");
+    const [policeStation, setpoliceStation]=useState("");
+    const [Location, setLocation]=useState("Anonymous");
+    const [crimeType, setcrimeType]=useState("");
+    const [date, setdate]=useState("");
+    const [audio, setaudio]=useState("Not Attached");
+    const [video, setvideo]=useState('Not Attached');
+    const [image, setimage]=useState("Not Attached");
+    const [description, setdescription]=useState("");
+    const [status, setstatus]=useState("");
+    const [subject, setsubject]=useState("");
+    const [zipPosta, setzipPosta]=useState("");
+    const [Caseid, setCaseid]=useState("");
+    const [FIRAgainst, setFIRAgainst] = useState({
+            firstName: "",
             lastName: "",
             gender: "",
             address: "",
             state: "",
-            province: ""},
-        subject:'',
-        zipPosta:'',
+            province: "",
     })
     const totalSteps = () => {
       return steps.length;
@@ -81,7 +161,7 @@ const FIR=()=>{
                <input
                     type="text1"
                     name='FIRAgainst'
-                    value={values.FIRAgainst.firstName .concat(values.FIRAgainst.lastName)}
+                    value={FIRAgainst.firstName.concat(" ").concat(FIRAgainst.lastName)}
                     readonly
                     disabled
                 />
@@ -91,7 +171,7 @@ const FIR=()=>{
                <input
                     type="text1"
                     name='FIRAgainst'
-                    value={values.FIRAgainst.address .concat(values.FIRAgainst.state).concat(values.FIRAgainst.province)}
+                    value={FIRAgainst.address.concat(" ").concat(FIRAgainst.state).concat(" ").concat(FIRAgainst.province)}
                     readonly
                     disabled
                 />
@@ -101,7 +181,7 @@ const FIR=()=>{
                <input
                     type="text1"
                     name='FIRAgainst'
-                    value={values.subject}
+                    value={subject}
                     readonly
                     disabled
                 />
@@ -111,7 +191,7 @@ const FIR=()=>{
                <input
                     type="text1"
                     name='zipPosta'
-                    value={values.zipPosta}
+                    value={zipPosta}
                     readonly
                     disabled
                 />
@@ -133,7 +213,7 @@ const Reporterinformation=()=>{
                 name='name'
                 disabled
                 readonly
-                value={values.name}
+                value={name}
                />
             </div>
              <div>
@@ -143,7 +223,7 @@ const Reporterinformation=()=>{
                 name='Cnic'
                 disabled
                 readonly
-                value={values.CNIC}
+                value={CNIC}
                />
             </div>
              <div>
@@ -153,7 +233,7 @@ const Reporterinformation=()=>{
                 name='City'
                 disabled
                 readonly
-                value={values.city}
+                value={city}
                />
             </div>
              <div>
@@ -163,7 +243,7 @@ const Reporterinformation=()=>{
                 name='Cnic'
                 disabled
                 readonly
-                value={values.CNIC}
+                value={date}
                />
             </div>
              <div>
@@ -173,7 +253,7 @@ const Reporterinformation=()=>{
                 name='Phone NO'
                 disabled
                 readonly
-                value={values.phone}
+                value={phone}
                />
             </div>
       </form>
@@ -193,7 +273,7 @@ const CrimeDetails=()=>{
                 name='name'
                 disabled
                 readonly
-                value={values.Caseid}
+                value={Caseid}
             />
         </div>
              <div>
@@ -203,7 +283,7 @@ const CrimeDetails=()=>{
                 name='CrimeType'
                 disabled
                 readonly
-                value={values.crimeType}
+                value={crimeType}
                />
             </div>
              <div>
@@ -213,7 +293,7 @@ const CrimeDetails=()=>{
                 name='Location'
                 disabled
                 readonly
-                value={values.Location}
+                value={Location}
                />
             </div>
             <div>
@@ -221,7 +301,7 @@ const CrimeDetails=()=>{
                 <input
                     type="text1"
                     name='policeStation'
-                    value={values.policeStation}
+                    value={policeStation}
                     readonly
                     disabled
                 />
@@ -235,7 +315,7 @@ const CrimeDetails=()=>{
                     minLength= "100"
                     maxLength='1000'
                     readonly
-                    value={values.description} 
+                    value={description} 
                 />
             </div>
             
@@ -294,7 +374,7 @@ const attachedEvidence=()=>{
     </Typography>
     <form className='report__form'>
       <video width="500" height="240" controls>
-            <source src={video}  type="video/mp4"></source>
+            <source src={Video}  type="video/mp4"></source>
       </video>
        
     </form>
@@ -334,7 +414,7 @@ const ProgressReport=()=>{
                 name='Status'
                 disabled
                 readonly
-                value={values.crimeType}
+                value={status}
                />
             </div>
        </form>
@@ -346,7 +426,7 @@ const ProgressReport=()=>{
         <>
           
         <Typography style={{marginTop: "70px", marginLeft: "7px" ,fontSize: '2rem',}}>Reported Crime 
-         <span style={{fontSize: '1rem',}}> case ID: (124-toba-c96)</span>
+         <span style={{fontSize: '1rem',}}> case ID: {Caseid}</span>
         </Typography>
 
         <Box sx={{ width: '100%' }}>

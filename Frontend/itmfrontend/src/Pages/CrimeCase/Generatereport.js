@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect , useRef,  useContext} from "react";
 import { AiFillStar } from "react-icons/ai"
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -7,7 +7,10 @@ import Grid from '@mui/material/Grid';
  
 
  
-const Genratereport=()=>{
+const Genratereport=(props)=>{
+      useEffect(() => {
+         console.log("UpdateEvidence" ,props)
+     })
      
 return(
         <form className='report__form'>
@@ -32,10 +35,11 @@ return(
                 <option value="Closed">Closed</option>
             </select>
         </div>
-         
-          
     </div>
+    <form className='report__form'>
+            <Button style={{backgroundColor : "#4CAF50" , marginTop : 20}}>Update</Button> 
       </form>
+    </form>
  )
 } 
 export default Genratereport

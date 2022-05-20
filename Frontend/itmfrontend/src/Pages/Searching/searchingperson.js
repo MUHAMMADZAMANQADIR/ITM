@@ -22,17 +22,20 @@ export default function Searchingperson() {
   const [callprofile , setcallprofile]=useState(false)
   const [message, setMessage] = useState("");
   const [sname ,setsname]=useState("")
-  const [filedata , setfiledata]=useState(null);
+  const [filedata , setfiledata]=useState([]);
   const [scnic, setscnic]=useState();
   const [name, setname] = useState("");
   const [cnic, setcnic] = useState(0);
   const [address, setaddress] = useState("");
   const [description, setdescription] = useState("");
   const [casetype, setcasetype] = useState("");
-  let file = new FormData();
+  const [image, setImage] = useState({ preview: '', data: '' })
+ 
   
 
   const baseURL = "http://localhost:8000";
+
+
   const getinfousingcnic = async () => {
   axios.get(`${baseURL}/${scnic}`)
   .then(function (response) {
@@ -48,29 +51,60 @@ export default function Searchingperson() {
     console.log(error);
   });  
   };
-  const getinfousingimage = async () => {
-  console.log(filedata)
-  setcallprofile(true)
-  await axios.post(`${baseURL}/image`,{
+ /**
+  * 
+  * 
+  * fetch('http://www.example.net', { // Your POST endpoint
+    method: 'POST',
+    headers: {
+      // Content-Type may need to be completely **omitted**
+      // or you may need something
+      "Content-Type": "You will perhaps need to define a content-type here"
+    },
+    body: file // This is your file object
+  })
+ ////////////
+
+    await axios.post(`${baseURL}/image`,{
   headers: {
      'content-type': 'multipart/form-data', 
   }, file},
   )
-  .then(function (response) {
-    const cdata= response.data
-    setname(cdata.name)
-    setcnic(cdata.Cnic)
-    setaddress(cdata.Location)
-    setdescription(cdata.Description)
-    setcasetype(cdata.CaseType)
+  */
+
+  const getinfousingimage = async () => {
+  console.log("in")
+  let formData = new FormData()
+ 
+  setcallprofile(true)
+  formData.append('file', image.data)
+  console.log("oooo" , formData)
+  let res=await fetch('http://localhost:8000/image', {
+   method: 'POST',
+   body: formData,
   })
-  .catch(function (error) {
-    console.log(error);
-  });  
+
+  let cdata = await res.text();
+  cdata=JSON.parse(cdata)
+  console.log("HI I AM DATA",typeof(cdata) ,cdata)
+  console.log("\n", "CNIC" , cdata.Cnic)
+  setname(cdata.name)
+  setcnic(cdata.Cnic)
+  setaddress(cdata.Location)
+  setdescription(cdata.Description)
+  setcasetype(cdata.CaseType)
+  setcallprofile(true)
+  //const cdata= 
+  
+ 
   };
+
+
+
   const getinfousingname = async () => {
   axios.get(`${baseURL}/${sname}`)
   .then(function (response) {
+    console.log(response)
     const cdata= response.data
     setname(cdata.name)
     setcnic(cdata.Cnic)
@@ -84,6 +118,8 @@ export default function Searchingperson() {
   });  
   };
   
+
+
   const Crimnalprofile=()=>{
     console.log({scnic})
     return(
@@ -104,10 +140,13 @@ export default function Searchingperson() {
   const handleNameInputChange = event => {
         setsname(event.target.value);
   };
-  const handleImageInputChange = event => {
-        
-        setfiledata(event.target.files[0]);
-        file.append("file", event.target.files[0]);
+  const handleImageInputChange = e => {
+     const img = {
+      preview: URL.createObjectURL(e.target.files[0]),
+      data: e.target.files[0],
+    }
+    setImage(img)
+    console.log(image)
          
   };
   const setscreencnic=()=>{

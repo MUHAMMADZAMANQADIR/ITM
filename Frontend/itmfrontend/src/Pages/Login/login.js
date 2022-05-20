@@ -51,7 +51,7 @@ const SignInForm = () => {
             const res = await axios.post("http://localhost:5000/api/investigationteams/logininvestigationteam", body, config)
             dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.investigationTeam })
             
-            console.log(res.data.investigationTeam)
+            console.log("from backend" ,res.data.investigationTeam)
             navigate("/dashboard");
         } catch (err) {
             dispatch({ type: "LOGIN_FAILURE", payload:err})

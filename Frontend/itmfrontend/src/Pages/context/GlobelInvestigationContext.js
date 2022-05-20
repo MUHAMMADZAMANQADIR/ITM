@@ -2,7 +2,7 @@ import { createContext, useEffect, useReducer } from "react"
 import InvesReducer from "./InvesReducer"
 
 const INITIAL_STATE = {
-    Investeam: JSON.parse(localStorage.getItem("Investeam")) || null ,
+    Investeam: JSON.parse(localStorage.getItem("Investeam")) || null,
     token: null,
     isFetching: false,
     error: false
@@ -16,7 +16,7 @@ export const InvesContextProvider = ({children}) => {
     //useEffect to get the user saved in the local storage
     useEffect(() => {
         localStorage.setItem("Investeam", JSON.stringify(state.Investeam))
-    },[state.user])
+    },[state.Investeam])
 
     return (
         <investigationContext.Provider value={{

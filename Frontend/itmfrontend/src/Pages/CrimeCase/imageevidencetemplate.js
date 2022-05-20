@@ -17,12 +17,12 @@ import Grid from '@mui/material/Grid';
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    height: 300,
-    width: 250,
+    height: 400,
+    width: 550,
   },
   media: {
-    height: 250,
-    width: 250,
+    height: 400,
+    width: 550,
   },
 }));
 export default function Imageevidencetemplate(props) {
@@ -34,7 +34,7 @@ export default function Imageevidencetemplate(props) {
         <CardMedia className={classes.media} image={props.image}/>  
          <CardContent>
           <Typography variant="h6">
-             Image 1
+             Image 
           </Typography>
         </CardContent> 
       </Card>
