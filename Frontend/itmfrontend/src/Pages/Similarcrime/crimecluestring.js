@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, TextField, Typography ,Button} from '@material-ui/core';
+import Alert from '@mui/material/Alert';
 import { width } from "@mui/material/node_modules/@mui/system";
+import Stack from '@mui/material/Stack';
+import { Grid} from "@material-ui/core";
+import Getsimilarcase from "./getprofile"
 var axios = require('axios');
 const useStyles = makeStyles((theme) => ({
   button:{
@@ -17,21 +21,27 @@ const useStyles = makeStyles((theme) => ({
  
 export default function CrimeCluestring() {
   
+  let cdata
   const classes = useStyles();
   const [name, setname] = useState("");
   const [cnic, setcnic] = useState(0);
   const [address, setaddress] = useState("");
   const [description, setdescription] = useState("");
   const [casetype, setcasetype] = useState("");
+  const [Similarcases , setSimilarcases]=useState([])
   const [inputtext , setinputtext]=useState()
+  const [open , setopen]=useState("false")
   const baseURL = "http://localhost:8000";
   
+
+  
   const getSimilarcases = async () => {
-  axios.get(`${baseURL}/similarcases/${inputtext}`)
-  .then(function (response) {
-    const cdata= response.data
-    console.log(cdata)
-  })
+
+  axios.get(`${baseURL}/similarcases/${inputtext}`).then(function (response) {
+  cdata =response.data
+  console.log("JSON -1 ",cdata)
+  setSimilarcases(cdata)
+  console.log("After Set",Similarcases)})
   .catch(function (error) {
     console.log(error);
   });  
@@ -39,6 +49,32 @@ export default function CrimeCluestring() {
   const handleInputChange = event => {
         setinputtext(event.target.value);
   };
+  const Showerror =()=>{
+    return(
+    <Stack sx={{ width: '100%' }} spacing={2}>
+          <Alert severity="error">This is an error alert — check it out!</Alert>
+
+    </Stack>
+  )}
+  const Callprofile = ()=>{ 
+    console.log("in")
+  return(  
+    
+    Similarcases.map((news)=>{
+      return(
+          <Grid key={news.id} sm={6} xs={12}>
+            <Getsimilarcase  style={{marginRight: '10px' }}
+              name={news.name}
+              Cnic={news.Cnic}
+              Location={news.Location}
+              CaseType={news.CaseType}
+              Description={news.Description}
+              ></Getsimilarcase> 
+            </Grid>
+      )
+    })         
+)}
+   
   return (
   <div style={{marginTop:"70px" , marginLeft: "10px"}}>
   
@@ -76,10 +112,12 @@ export default function CrimeCluestring() {
           align: "center",
           
         }}
-        onClick={getSimilarcases()}
+        onClick={getSimilarcases}
         >Upload</Button>
   </Box>
 </div>
+  {Similarcases.length>=0  ?<Callprofile/> :<Showerror/>}
+
 </div>
-  );
+);
 }

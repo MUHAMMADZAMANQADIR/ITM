@@ -9,6 +9,7 @@ import Casetemplate from "../CrimeCase/Casetemplates";
 import caseinfo from './Casedb'
 import axios from 'axios'
 import {investigationContext} from "../../Pages/context/GlobelInvestigationContext";
+
 const useStyles = makeStyles((theme) => ({
   right: {
     [theme.breakpoints.down("sm")]: {
