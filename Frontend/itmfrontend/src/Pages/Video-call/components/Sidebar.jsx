@@ -40,6 +40,9 @@ const useStyles = makeStyles((theme) => ({
 const Sidebar = ({ children }) => {
   const { me, callAccepted, name, setName, callEnded, leaveCall, callUser } = useContext(SocketContext);
   const [idToCall, setIdToCall] = useState('');
+  const [CNIC , setCNIC]=useState('')
+  const [investigationteam  , setinvestigationteam ]=useState('')
+  const [NotificationBody , setNotificationBody]=useState('')
   const classes = useStyles();
 
   return (
@@ -70,6 +73,14 @@ const Sidebar = ({ children }) => {
                 </Button>
               )}
             </Grid>
+            <Typography gutterBottom variant="h6">Send call ID</Typography>
+            <Grid item xs={12} md={6}  style={{display: 'flex', flexdirection: 'row' , marginTop:"35px"}}>
+              <TextField style={{marginRight: "50px" , marginLeft: "-80px"}} label="Enter CNIC" value={CNIC} onChange={(e) => setCNIC(e.target.value)} fullWidth />
+              <TextField style={{marginRight: "-150px" , }} label="Enter Call ID" value={me} fullWidth />
+            </Grid>
+            <Button variant="contained" color="primary" startIcon={<Phone fontSize="large" />} fullWidth className={classes.margin}>
+                  Send Call-ID
+            </Button>
           </Grid>
         </form>
         {children}

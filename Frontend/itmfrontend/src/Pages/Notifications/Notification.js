@@ -7,10 +7,7 @@ const Notification = ( ) =>{
 
   useEffect(()=>{
     console.log("Notification")
-    const timer = setTimeout(() => getnoti(), 1000);
-    
-    
-     
+    const timer = setTimeout(() => getnoti(), 10000);
   })
   const getnoti = async () => {
     try {
