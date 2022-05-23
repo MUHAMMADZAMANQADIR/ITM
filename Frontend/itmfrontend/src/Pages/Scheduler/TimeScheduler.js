@@ -45,7 +45,7 @@ class TimeScheduler extends React.Component{
     };
     this.onInputchange = this.onInputchange.bind(this);
     this.onSubmitForm = this.onSubmitForm.bind(this);
-
+    
 
   }
    
@@ -56,9 +56,10 @@ class TimeScheduler extends React.Component{
   }
 
   onSubmitForm() {
-    
-    this.state.NotificationBody="Your Meeting With us Scheduler at".concat(this.state.StartTime).concat("to").concat(this.state.EndTime)
-    .concat("Your Case-ID is").concat(this.state.CaseID)
+    console.log("tme sch")
+    if(this.state.CNIC){
+    this.state.NotificationBody="Your Meeting With us Scheduler at".concat("  ").concat(this.state.StartTime).concat("  ").concat("to").concat(this.state.EndTime)
+    .concat("  ").concat("Your Case-ID is").concat("  ").concat(this.state.CaseID).concat("  ").concat("Call-ID Will shared with you just 2 mint before the Meeting.")
     console.log(this.state)
     const body=JSON.stringify(this.state)
     const config = {
@@ -69,10 +70,12 @@ class TimeScheduler extends React.Component{
     try {
             const res =axios.post("http://localhost:5000/api/notification/sendnotification", body, config)
             console.log(res.data)
+            this.state.CNIC="";
         } catch (err) {
             console.log(err)
         }
-    
+
+    }
 
   }
   //setSubject
@@ -186,7 +189,7 @@ class TimeScheduler extends React.Component{
              </tr>
         
          </tbody>
-        <Button variant="outlined"  onClick={this.onSubmitForm}>
+        <Button variant="outlined"  onClick={this.onSubmitForm()}>
             Send
         </Button>
          </table>
