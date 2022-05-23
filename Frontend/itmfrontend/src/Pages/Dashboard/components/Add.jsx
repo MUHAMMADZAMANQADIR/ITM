@@ -96,7 +96,7 @@ const Add = () => {
             }
         }
          try {
-            const res =axios.post("http://localhost:5000/api/news/postanews", body, config)
+            const res = axios.post("http://localhost:5000/api/news/postanews", body, config)
             console.log(res.data)
         } catch (err) {
             console.log(err)

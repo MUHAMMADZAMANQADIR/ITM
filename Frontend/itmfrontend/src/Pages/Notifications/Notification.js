@@ -1,15 +1,35 @@
 import Notifications from "react-notifications-menu"
- 
+import React, { useState, useEffect , useRef,  useContext} from "react";
+import axios from 'axios'
 const Notification = ( ) =>{
+  const [notificationdata , setnotificationdata]=useState([{image: ''
+    , message: ""}])
 
+  useEffect(()=>{
+    console.log("Notification")
+    const timer = setTimeout(() => getnoti(), 1000);
+    
+    
+     
+  })
+  const getnoti = async () => {
+    try {
+            const res =await axios.get("http://localhost:5000/api/notification/getnoticication")
+            const newData = res.data.map(item => ({image: 'https://i.ibb.co/f0Knd0d/police-officer-posing-crossing-arms-vector-138952895.jpg' ,message: item.NotificationBody}));
+            setnotificationdata(newData)
+            console.log(notificationdata)
+        } catch (err) {
+            console.log(err)
+        }
+  };
   const data=[
     {
-      image: 'https://synergi-dev.s3.ap-southeast-1.amazonaws.com/profile-pictures/6b9.png' ,
+      image: 'https://i.ibb.co/f0Knd0d/police-officer-posing-crossing-arms-vector-138952895.jpg' ,
       message: 'Kameshwaran S had shared a feedback with you.',
       
     },
     {
-      image: 'https://synergi-dev.s3.ap-southeast-1.amazonaws.com/profile-pictures/6b9.png' ,
+      image: 'https://i.ibb.co/f0Knd0d/police-officer-posing-crossing-arms-vector-138952895.jpg' ,
       message: (
         <p>
           Kameshwaran S had shared a{' '}
@@ -22,7 +42,7 @@ const Notification = ( ) =>{
 
    return  (
  <Notifications  
-   data={data} 
+   data={notificationdata} 
    header={{
     title: 'Notifications',
     option: { text: 'View All', onClick: () => console.log('Clicked') },
