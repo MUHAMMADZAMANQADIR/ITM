@@ -18,7 +18,7 @@ import { Link as RouterLink } from "react-router-dom";
 import { TextField } from '@mui/material';
 import { CssTextField, useSty } from './styles';
 import "./login.css";
-import { BsChevronDoubleRight } from 'react-icons/bs'
+import { BsChevronDoubleRight } from 'react-icons/bs' 
 import { useNavigate } from "react-router-dom";
 import {investigationContext} from "../context/GlobelInvestigationContext"
 const SignInForm = () => {
@@ -49,9 +49,9 @@ const SignInForm = () => {
         try {
             dispatch({ type: "LOGIN_START" })
             const res = await axios.post("http://localhost:5000/api/investigationteams/logininvestigationteam", body, config)
-            dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.investigationTeam })
+            dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.investigationTeam , token: res.data.token})
             
-            console.log("from backend" ,res.data.investigationTeam)
+            console.log("from backend" ,res.data.investigationTeam , res.data.token)
             navigate("/dashboard");
         } catch (err) {
             dispatch({ type: "LOGIN_FAILURE", payload:err})

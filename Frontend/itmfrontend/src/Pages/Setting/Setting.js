@@ -6,6 +6,7 @@ import Navbar from "../Dashboard/components/Navbar";
 import Rightbar from "../Dashboard/components/Rightbar";
 import Footer from "../Footer/Footer"
 import Profile from "./Profile"
+import UpdateProfile from "./LoginProfile"
 import { useState } from 'react';
 
 const useStyles = makeStyles((theme) => ({
@@ -27,7 +28,7 @@ const Setting = () => {
           <Leftbar />
         </Grid>
         <Grid item sm={7} xs={10}>
-           <Profile></Profile>
+           <UpdateProfile></UpdateProfile>
         </Grid>
         <Grid item sm={3} className={classes.right}>
           <Rightbar />

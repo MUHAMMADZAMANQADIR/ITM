@@ -9,6 +9,7 @@ const InvesReducer = (state, action) => {
         case 'LOGIN_SUCCESS':
             return {
                 Investeam: action.payload,
+                token: action.token,
                 isFetching: false,
                 error: false
             }
@@ -18,6 +19,11 @@ const InvesReducer = (state, action) => {
                 isFetching: false,
                 error: action.payload              
             }
+        case 'UPDATE':
+            return {
+                Investeam: action.payload,
+                isFetching: false,            
+            }    
         case 'AUTH_TOKEN':
             return {
                 token: action.payload

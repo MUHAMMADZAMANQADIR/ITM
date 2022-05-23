@@ -1,3 +1,4 @@
+import React, { useState, useEffect , useRef,  useContext} from "react";
 import { Container, makeStyles, Typography,Button } from "@material-ui/core";
 import {
   Bookmark,
@@ -8,11 +9,13 @@ import {
   Settings,
   Storefront,
 } from "@material-ui/icons";
+import {investigationContext} from "../../context/GlobelInvestigationContext"
 import ChatIcon from '@mui/icons-material/Chat';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import StorageIcon from '@mui/icons-material/Storage';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import { Link}   from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   container: {
     height: "100vh",
@@ -51,6 +54,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Leftbar = () => {
+  const { isFetching, token, Investeam, error, dispatch } = useContext(investigationContext)
+  const navigate = useNavigate()
+ 
   const classes = useStyles();
   return (
     <Container className={classes.container}>
@@ -86,7 +92,7 @@ const Leftbar = () => {
       </div>
       <div className={classes.item}>
         <ExitToApp className={classes.icon} />
-        <Button className={classes.text} component={Link} to='/logout'>Logout</Button>
+        <Button className={classes.text} component={Link} to='/dashboard'>Logout</Button>
       </div>
     </Container>
   );
