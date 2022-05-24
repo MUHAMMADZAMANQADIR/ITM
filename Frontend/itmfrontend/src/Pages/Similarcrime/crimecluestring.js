@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, TextField, Typography ,Button} from '@material-ui/core';
 import Alert from '@mui/material/Alert';
-import { width } from "@mui/material/node_modules/@mui/system";
+import { width } from "@mui/material";
 import Stack from '@mui/material/Stack';
 import { Grid} from "@material-ui/core";
 import Getsimilarcase from "./getprofile"

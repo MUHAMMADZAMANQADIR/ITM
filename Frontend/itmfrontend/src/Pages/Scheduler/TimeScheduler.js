@@ -4,7 +4,7 @@ import {Inject, ScheduleComponent , Day , Week , Month , Agenda ,  TimelineViews
 import Button from '@mui/material/Button';
 import {DropDownListComponent} from '@syncfusion/ej2-react-dropdowns';
 import {DateTimePickerComponent} from '@syncfusion/ej2-react-calendars'
-import { width } from "@mui/material/node_modules/@mui/system";
+import { width } from "@mui/material";
 import {investigationContext} from "../../Pages/context/GlobelInvestigationContext";
 import { notification } from "antd";
 import {L10n } from '@syncfusion/ej2-base';

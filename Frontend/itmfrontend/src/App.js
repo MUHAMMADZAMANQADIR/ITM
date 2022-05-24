@@ -14,6 +14,7 @@ import { InvesContextProvider } from "./Pages/context/GlobelInvestigationContext
 import { ContextProvider } from './Pages/Video-call/Context.js';
 import  {CasesContextProvider} from "./Pages/CasesContext/CasesContext"
 import {IdProvider} from "./Pages/Globelvariable/Globelvariable"
+//import Stpage from "./Pages/stpage/stpage"
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
           <Route exact path="/setting" element={<InvesContextProvider><Setting/></InvesContextProvider>}></Route>
         
           <Route exact path="/allCases" element={<IdProvider><InvesContextProvider><CrimeCases/></InvesContextProvider></IdProvider>}></Route>
-          
+
           <Route exact path="/schedulecall" element={<Callsheduler/>}></Route>
           <Route exact path="/vediocall" element={<InvesContextProvider><ContextProvider><Videocall/></ContextProvider></InvesContextProvider>}></Route>
           <Route exact path="/specificcase" element={<IdProvider><InvesContextProvider><SpecificCrimeCase/></InvesContextProvider></IdProvider>}></Route>

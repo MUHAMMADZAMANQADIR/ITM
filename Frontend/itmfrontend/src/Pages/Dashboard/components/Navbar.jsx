@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 }
   
 }));
-
+// 67 <Notification />
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const classes = useStyles({ open });
@@ -64,7 +64,7 @@ const Navbar = () => {
         <img src={icon} className={classes.logoLg}/>
         <div className={classes.icons}>
             <div className={classes.notificationtogglebtn} style={{marginRight: "15px", marginTop: "5px" }}>
-               <Notification />
+            <Notification />
             </div>
                 <Avatar
                   alt="Remy Sharp"
