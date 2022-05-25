@@ -73,13 +73,13 @@ const Sidebar = ({ children }) => {
   }
   return (
     <Container className={classes.container}>
-        
+        {setName(Investeam.LeaderName.concat("(").concat(Investeam.TeamName).concat(")"))}
       <Paper elevation={10} className={classes.paper}>
         <form className={classes.root} noValidate autoComplete="off">
           <Grid container className={classes.gridContainer}>
             <Grid item xs={12} md={6} className={classes.padding}>
               <Typography gutterBottom variant="h6">Account Info</Typography>
-              <TextField label="Name" value={name} onChange={(e) => setName(e.target.value)} fullWidth />
+              <TextField label="Name" value={Investeam.LeaderName.concat("(").concat(Investeam.TeamName).concat(")")}  fullWidth />
                {console.log(me)}
               <CopyToClipboard text={me} className={classes.margin}>
                 <Button variant="contained" color="primary" fullWidth startIcon={<Assignment fontSize="large" />}>

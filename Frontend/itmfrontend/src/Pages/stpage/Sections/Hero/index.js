@@ -75,7 +75,7 @@ const MainContent = styled.div`
 
 const MobileSvg = styled.img`
   max-width: 100%;
-  width: calc(30% + 20vw);
+  width: calc(30% + 10vw);
   height: auto;
   z-index: 7;
   animation: ${move} 2.5s ease infinite;
@@ -142,7 +142,7 @@ const Title = styled.h1`
 
 const SubText = styled.h5`
   font-size: calc(0.5rem + 0.5vw);
-  color: var(--nav2);
+  ${'' /* color: var(--nav2); */}
 `;
 
 const CTA = styled.button`
