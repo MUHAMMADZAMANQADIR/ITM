@@ -15,7 +15,8 @@ import { ContextProvider } from './Pages/Video-call/Context.js';
 import  {CasesContextProvider} from "./Pages/CasesContext/CasesContext"
 import {IdProvider} from "./Pages/Globelvariable/Globelvariable"
 import Stpage from "./Pages/stpage/stpage"
-
+import ForensicLab from "./Pages/ForensicLab/ForensicLab"
+//import NewLogin from "./Pages/Login/newlogin/NewLogin"
 function App() {
   return (
     <Router>    
@@ -23,12 +24,10 @@ function App() {
         
           <Route exact path="/" element={<Stpage/> }></Route>
           <Route exact path="/loginpage" element={<InvesContextProvider><Login/></InvesContextProvider> }></Route>
-           
           <Route exact path="/dashboard" element={<InvesContextProvider><Dashboard/></InvesContextProvider>}></Route>
           <Route exact path="/setting" element={<InvesContextProvider><Setting/></InvesContextProvider>}></Route>
-        
+          <Route exact path="/forensicLab" element={<InvesContextProvider><ForensicLab/></InvesContextProvider>}></Route>
           <Route exact path="/allCases" element={<IdProvider><InvesContextProvider><CrimeCases/></InvesContextProvider></IdProvider>}></Route>
-
           <Route exact path="/schedulecall" element={<Callsheduler/>}></Route>
           <Route exact path="/vediocall" element={<InvesContextProvider><ContextProvider><Videocall/></ContextProvider></InvesContextProvider>}></Route>
           <Route exact path="/specificcase" element={<IdProvider><InvesContextProvider><SpecificCrimeCase/></InvesContextProvider></IdProvider>}></Route>

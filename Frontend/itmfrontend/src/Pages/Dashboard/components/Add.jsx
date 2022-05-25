@@ -84,8 +84,11 @@ const Add = () => {
 
     setOpenAlert(false);
   };
+  function handleSelectChange(event) {
+            setNewsType(event.target.value);
+  }
   const handleSend=()=>{
-        console.log("88930435")
+        console.log("NewsType", NewsType)
          
         const body = JSON.stringify( { Description, CarModel ,Crime ,color ,
         BrandName, Age,Name, NewsType, NewsTitle, Location})
@@ -126,11 +129,12 @@ const Add = () => {
             <div className={classes.item}>
             <div style={{marginBottom: 3 , marginTop: '-10px' }}>
             <label  for="NewsType">News Type: </label>
-            <select name="NewsType"  onChange={event=>setNewsType(event.target.value)}>
+            <select name="NewsType" value={NewsType}  onChange={handleSelectChange}>
+                <option value="News">News</option>
                 <option value="Missing Person">Missing Person</option>
                 <option value="Missing Vehicle">Missing Vehicle</option>
                 <option value="Wanted Criminals">Wanted Criminals</option>
-                <option value="News">other News</option>
+                
             </select>
             
             </div>

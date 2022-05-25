@@ -27,7 +27,7 @@ function Stpage() {
       <Suspense fallback={null}>
         <GlobalStyle />
         <ScrollToTop />
-        <Header />
+        <Header/>
         <Home />
         <Footer />
       </Suspense>

@@ -9,6 +9,8 @@ import {
   Settings,
   Storefront,
 } from "@material-ui/icons";
+import BorderClearIcon from '@mui/icons-material/BorderClear';
+import BiotechIcon from '@mui/icons-material/Biotech';
 import {investigationContext} from "../../context/GlobelInvestigationContext"
 import ChatIcon from '@mui/icons-material/Chat';
 import ScheduleIcon from '@mui/icons-material/Schedule';
@@ -71,7 +73,7 @@ const Leftbar = () => {
       </div>
        <div className={classes.item}>
         <ScheduleIcon className={classes.icon} />
-        <Button className={classes.text} component={Link} to='/schedulecall'>schedule call</Button>
+        <Button className={classes.text} component={Link} to='/schedulecall'>Scheduler</Button>
       </div>
       <div className={classes.item}>
         <PhotoCamera className={classes.icon} />
@@ -83,8 +85,12 @@ const Leftbar = () => {
         <Button className={classes.text} component={Link} to='/criminaldata'>Criminal Data</Button>
       </div>
       <div className={classes.item}>
-        <Storefront className={classes.icon} />
+        <BorderClearIcon className={classes.icon} />
         <Button className={classes.text} component={Link} to='/similarcrime'>Similar crime</Button>
+      </div>
+      <div className={classes.item}>
+        <BiotechIcon  className={classes.icon} />
+        <Button className={classes.text} component={Link} to='/forensicLab'>Forensic Lab</Button>
       </div>
       <div className={classes.item}>
         <Settings className={classes.icon} />
