@@ -14,14 +14,14 @@ import { InvesContextProvider } from "./Pages/context/GlobelInvestigationContext
 import { ContextProvider } from './Pages/Video-call/Context.js';
 import  {CasesContextProvider} from "./Pages/CasesContext/CasesContext"
 import {IdProvider} from "./Pages/Globelvariable/Globelvariable"
-//import Stpage from "./Pages/stpage/stpage"
+import Stpage from "./Pages/stpage/stpage"
 
 function App() {
   return (
     <Router>    
         <Routes>
         
-          <Route exact path="/" element={<Home/> }></Route>
+          <Route exact path="/" element={<Stpage/> }></Route>
           <Route exact path="/loginpage" element={<InvesContextProvider><Login/></InvesContextProvider> }></Route>
            
           <Route exact path="/dashboard" element={<InvesContextProvider><Dashboard/></InvesContextProvider>}></Route>
@@ -36,7 +36,7 @@ function App() {
           <Route exact path="/criminaldata" element={<InvesContextProvider><Searching/></InvesContextProvider>}></Route>
           <Route exact path="/similarcrime" element={<IdProvider><InvesContextProvider><Similarcrime/></InvesContextProvider></IdProvider>}></Route>
           
-          <Route exact path="/logout" element={<Home/>}></Route>
+          <Route exact path="/logout" element={<Stpage/>}></Route>
            
            
         </Routes>

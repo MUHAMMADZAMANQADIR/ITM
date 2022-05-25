@@ -1,8 +1,12 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { IconButton} from '@material-ui/core';
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import logo from "../../assets/police.png";
+import Avatar from '@mui/material/Avatar';
+import {Link} from 'react-router-dom';
+import Tooltip from '@mui/material/Tooltip';
 
 const Headers = styled.header`
   display: flex;
@@ -239,16 +243,16 @@ const Header = () => {
       </Logo>
       <Nav>
         <a href="#home" onClick={(e) => scrollUp("home", e)}>
-          Home
+         <Button style={{marginRight: "8px"}}> Home</Button>
         </a>
         <a href="#about" onClick={(e) => scrollUp("about", e)}>
-          About Us
+          <Button style={{marginRight: "8px"}}>About</Button>
         </a>
         <a href="#services" onClick={(e) => scrollUp("services", e)}>
-          Services
+          <Button style={{marginRight: "8px"}}>Services</Button>
         </a>
         <a href="#contact" onClick={(e) => scrollUp("contact", e)}>
-          <Button>Contact Us</Button>
+          <Button  style={{marginRight: "8px"}}>Contact</Button>
         </a>
       </Nav>
       <HamburgerBtn clicked={click} onClick={() => setClick(!click)}>
@@ -267,6 +271,7 @@ const Header = () => {
         <a href="#contact" onClick={(e) => handleClick("contact", e)}>
           <Button>Contact Us</Button>
         </a>
+
       </MobileMenu>
     </Headers>
   );

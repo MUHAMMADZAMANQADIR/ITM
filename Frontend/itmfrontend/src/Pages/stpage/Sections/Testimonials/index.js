@@ -1,17 +1,17 @@
 import React, { lazy } from "react";
 import styled from "styled-components";
-
 import Slider from "react-slick";
-import "../../../node_modules/slick-carousel/slick/slick.css";
-import "../../../node_modules/slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-const Card = lazy(() => import("../../components/Card/index"));
+import Card from "../../components/Card/index";
 
 const Section = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #979da6;
   width: 100%;
   padding: 5rem 0;
 `;
@@ -79,34 +79,32 @@ const Testimonials = () => {
   };
 
   return (
-    <Section>
-      <Title>Few good words about us!</Title>
+    <Section id="testimonials">
+      <Title>Our Top Service!</Title>
       <Carousal>
         <Slider {...settings}>
           <Card
-            text="CodeBucks has been essential part of our business. I would definetly
-        recommend CodeBucks. It has been amazing to have them."
-            name="Jenny (CodeCall)"
+            text= "On many occasions police encounter serial crimes Using its accurate and powerful machine learning model crime pattern
+             clustering allows the investigation team to investigate the crime by searching past cases for 
+            similar crime patterns and potentially identifying the criminal."
+            name="Identify through Pattern"
             image="avatar-1"
           />
 
           <Card
-            text="CodeBucks has been essential part of our business. I would definetly recommend CodeBucks. It has been amazing to have them."
-            name="Jenny (CodeCall)"
+            text="Estimonies are a vital part of an investigation, so this module allows the ITP in recording testimonies its secure video call service. This video call recording will be helpful in investigation, as it cannot be tempered or deleted."
+            name="Video Call and Testimony"
             image="avatar-2"
           />
 
           <Card
-            text="CodeBucks has been essential part of our business. I would definetly recommend CodeBucks. It has been amazing to have them."
-            name="Jenny (CodeCall)"
+            text="An accurate machine learning model trained to identify a person using facial recognition algorithms to search for a previous criminal utilizing a single face photograph. The Investigation Team Panel (ITP) 
+            can also use the CNIC number and name to search for the criminal database."
+            name="Retrieving Criminal Data"
             image="avatar-3"
           />
 
-          <Card
-            text="CodeBucks has been essential part of our business. I would definetly recommend CodeBucks. It has been amazing to have them."
-            name="Jenny (CodeCall)"
-            image="avatar-4"
-          />
+   
         </Slider>
       </Carousal>
     </Section>

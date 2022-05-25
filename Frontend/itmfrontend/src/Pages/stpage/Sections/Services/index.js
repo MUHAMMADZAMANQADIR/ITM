@@ -324,7 +324,7 @@ const Services = () => {
         <Triangle id="triangle" />
       </Background>
 
-      <Content ref={addToRefs}>
+      {/* <Content ref={addToRefs}>
         <TextBlock
           topic="Design"
           title={<h1>We build award winning Designs</h1>}
@@ -354,7 +354,7 @@ const Services = () => {
           <img src={Cone} alt="Cone Object" width="400" height="400" />
         </OBJ>
         <SvgBlock svg="Develope.svg" />
-      </Content>
+      </Content> */}
       <Content>
         <TextBlock
           topic="Support"

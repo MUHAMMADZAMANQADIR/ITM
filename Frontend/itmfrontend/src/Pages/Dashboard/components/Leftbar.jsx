@@ -92,7 +92,7 @@ const Leftbar = () => {
       </div>
       <div className={classes.item}>
         <ExitToApp className={classes.icon} />
-        <Button className={classes.text} component={Link} to='/dashboard'>Logout</Button>
+        <Button className={classes.text} component={Link} to='/logout'>Logout</Button>
       </div>
     </Container>
   );

@@ -47,14 +47,12 @@ const Footer = () => {
   return (
     <FOOTER>
       <LeftText>
-        © 2021 Built and Design by{" "}
-        <a href="https://www.youtube.com/channel/UCeYt6blRBKuNrEg_-282fSA">
-          @CodeBucks
-        </a>
+        © 2022 Built and Design by CRIS FYP project Team{" "}
+         
       </LeftText>
       <RightText>
         Reach out to me via 😉
-        <a href="https://twitter.com/code_bucks">
+        <a href="https://twitter.com/MUHAMMADZAMANQ7">
           <img src={Twitter} alt="Twitter" />
         </a>
         &nbsp;
@@ -62,7 +60,7 @@ const Footer = () => {
           <img src={Instagram} alt="Instagram" />
         </a>
         &nbsp;
-        <a href="mailto:codebucks27@gmail.com?subject=Email From Your Website">
+        <a href="https://mail.google.com/mail/u/0/#inbox">
           <img src={Gmail} alt="Gmail" />
         </a>
       </RightText>

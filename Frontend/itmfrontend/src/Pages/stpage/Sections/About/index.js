@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 import wave from "../../assets/waves.svg";
-import rocket from "../../assets/rocket image.png";
-import human from "../../assets/human.svg";
+import rocket from "../../assets/handcuffs-308897.svg";
+import human from "../../assets/police-removebg-preview.png";
 import hand from "../../assets/hand.svg";
 
 const move = keyframes`
@@ -138,11 +138,12 @@ const About = () => {
               <img src={human} alt="" width="400" height="400" />
             </Human>
 
-            <Text>
-              We help our customers to tell about themselves, to grow and stand
-              out in an increasingly competitive digital world, through creative
-              projects that are able to attract and involve, creating strategic
-              value.
+            <Text style={{textAlign: "justify"}}>
+              To achieve excellence in Investigation by promoting culture of merit,
+              providing continuous professional training, ensuring effective internal accountability,
+              encouraging use of technology and having a meaningful feedback mechanism.A law enforcement agency
+              which not only enjoys the respect of the society, for its integrity, professional competence,
+              and impartiality but also serves as a role model for provincial police forces
             </Text>
             <div>
               <Circle style={{ backgroundColor: "var(--purple)" }} />

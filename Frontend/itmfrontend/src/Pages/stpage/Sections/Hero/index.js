@@ -195,10 +195,12 @@ const HeroSection = () => {
           <SubText>
              (Sub-wing  Investigation)
           </SubText>
+          <a href="/loginpage"  >
           <CTA>
-            Get in touch &nbsp;
+             GO TO Login &nbsp;
             <img src={arrow} alt="cta" width="100" height="100" />
           </CTA>
+           </a>
         </Lb>
 
         <MobileSvg
