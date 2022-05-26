@@ -16,14 +16,14 @@ import  {CasesContextProvider} from "./Pages/CasesContext/CasesContext"
 import {IdProvider} from "./Pages/Globelvariable/Globelvariable"
 import Stpage from "./Pages/stpage/stpage"
 import ForensicLab from "./Pages/ForensicLab/ForensicLab"
-//import NewLogin from "./Pages/Login/newlogin/NewLogin"
+import NewLogin from "./Pages/Login/newlogin/NewLogin"
 function App() {
   return (
     <Router>    
         <Routes>
         
           <Route exact path="/" element={<Stpage/> }></Route>
-          <Route exact path="/loginpage" element={<InvesContextProvider><Login/></InvesContextProvider> }></Route>
+          <Route exact path="/loginpage" element={<InvesContextProvider><NewLogin/></InvesContextProvider> }></Route>
           <Route exact path="/dashboard" element={<InvesContextProvider><Dashboard/></InvesContextProvider>}></Route>
           <Route exact path="/setting" element={<InvesContextProvider><Setting/></InvesContextProvider>}></Route>
           <Route exact path="/forensicLab" element={<InvesContextProvider><ForensicLab/></InvesContextProvider>}></Route>
