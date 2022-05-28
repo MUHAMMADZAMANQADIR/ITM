@@ -77,6 +77,7 @@ return(
             <select name="crimeType" onChange={event=>setstatus(event.target.value)} required>
                 <option value="In progress">In progress</option>
                 <option value="Closed">Closed</option>
+                <option value="Closed">Fake</option>
             </select>
         </div>
     </div>

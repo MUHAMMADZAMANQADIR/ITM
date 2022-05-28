@@ -13,7 +13,7 @@ app.use(cors());
 
 const PORT = process.env.PORT || 5500;
 
-app.get('/Videocall', (req, res) => {
+app.get('/', (req, res) => {
 	res.send('Running');
 });
 

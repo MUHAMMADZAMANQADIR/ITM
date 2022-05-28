@@ -26,12 +26,14 @@ const CrimeCases = () => {
   const {Investeam, error } = useContext(investigationContext)
    // Fetch data
   useEffect(() => {
+
     console.log("Investeam - id" , Investeam._id)
     let url = `http://localhost:5000/api/getcases/${Investeam._id}`;
     axios
       .get(url)
       .then(function (response) {
         updatecase(response.data);
+        console.log("cases data",response.data)
       })
       .catch((error) => console.log(error));
   }, []);
@@ -63,7 +65,7 @@ const CrimeCases = () => {
                         caseID={news.caseID}
                         id={news._id}
                         description={news.description}
-                        evidence={news.Image1}
+                        evidence={news.img}
                         date={news.ReportedDate.slice(0,10)}
                         ReportType={news.ReportType}
                         Repoterid={news.user}

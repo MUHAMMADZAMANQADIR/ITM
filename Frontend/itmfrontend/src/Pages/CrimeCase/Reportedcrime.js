@@ -53,6 +53,9 @@ const Report = (props) => {
         setdate(response.data.ReportedDate)
         setFIRAgainst(response.data.firAgainst)
         setLocation(response.data.firAgainst.address)
+        setimage(response.data.img)
+        setvideo(response.data.video)
+        setaudio(response.data.audio)
          
       })
       .catch((error) => console.log(error));
@@ -77,7 +80,9 @@ const Report = (props) => {
         setdate(response.data.ReportedDate)
         setLocation(response.data.location)
         setFIRAgainst(response.data.firAgainst)
-
+        setimage(response.data.img)
+        setvideo(response.data.video)
+        setaudio(response.data.audio)
       })
       .catch((error) => console.log(error));
   };
@@ -97,11 +102,15 @@ const Report = (props) => {
         setCaseid(response.data.caseID)
         setdate(response.data.ReportedDate)
         setLocation(response.data.location)
+        setimage(response.data.img)
+        setvideo(response.data.video)
+        setaudio(response.data.audio)
       })
       .catch((error) => console.log(error));
   };
      
-    const Video=process.env.PUBLIC_URL + '/assets/No Money_ No Tension.mp4'
+    const Video=process.env.PUBLIC_URL + '/assets/not attached video.mp4'
+    const Image1= require( "../../image Not Attached.png");
     const [activeStep, setActiveStep] = React.useState(0);
     const [completed, setCompleted] = React.useState({});
     const [Reportedtype, setReportedtype]=useState("");
@@ -114,7 +123,7 @@ const Report = (props) => {
     const [crimeType, setcrimeType]=useState("");
     const [date, setdate]=useState("");
     const [audio, setaudio]=useState("Not Attached");
-    const [video, setvideo]=useState('Not Attached');
+    const [Vid, setvideo]=useState('Not Attached');
     const [image, setimage]=useState("Not Attached");
     const [description, setdescription]=useState("");
     const [status, setstatus]=useState("");
@@ -344,17 +353,15 @@ const attachedEvidence=()=>{
     </Typography>
      
     <form className='report__form'>
-      {
-        caseinfo.map((news)=>{
-              return(
-                <Grid key={news.key} sm={6} xs={12}>
-                <Imageevidencetemplate style={{marginRight: '10px' }}
-                        image={news.Image1}>
-                </Imageevidencetemplate>
+               
+                <Grid sm={6} xs={12}>
+                <img src={image ||Image1} alt="Flowers in Chania" width="460" height="345"></img>
+                {/* <Imageevidencetemplate style={{marginRight: '10px' }}
+                        image={image ||Image1}>
+                </Imageevidencetemplate> */}
                 </Grid>
-              )
-        })    
-      } 
+            
+       
       </form>
       <Typography 
       variant="h5"
@@ -374,9 +381,32 @@ const attachedEvidence=()=>{
     </Typography>
     <form className='report__form'>
       <video width="500" height="240" controls>
-            <source src={Video}  type="video/mp4"></source>
+            <source src={Vid || Video}  type="video/mp4"></source>
       </video>
        
+    </form>
+    <Typography 
+      variant="h5"
+      align='center'
+      style={{
+          color: '#00ff55',
+          backgroundColor : 'black',
+          marginTop: '-50px',
+          marginLeft: '100px',
+          marginRight: '100px',
+          marginBottom: '15px',
+          
+      }}
+    >
+     AudioType Evidence
+     <span style={{fontSize: '1rem',}}> (If any)</span>
+    </Typography>
+    <form className='report__form'>
+      <audio controls>
+          
+          <source src={audio}  type="audio/mp3"></source>
+          
+      </audio> 
     </form>
     </>
   )
