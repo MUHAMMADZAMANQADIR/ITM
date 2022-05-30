@@ -11,7 +11,9 @@ import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 import {investigationContext} from "../../Pages/context/GlobelInvestigationContext";
 import axios from 'axios'
+import storage from "../../firebase";
 import FormData from 'form-data'
+import LinearProgress from '@mui/material/LinearProgress';
 const Input = styled('input')({
   display: 'none',
 });
@@ -21,8 +23,14 @@ const  UpdateEvidence=(props)=>{
     const [CaseID , setcaseID]=useState("") 
     const [repoterid , setRepoterid]=useState("") 
     const [reportType , setReportType]=useState("")
+    const [Uploadedimg, setUploadedimg]=useState(0)
+    const [Uploadedvid, setUploadedvid]=useState(0)
     const {Investeam, error} = useContext(investigationContext)
-    const [image, setImage] = useState({ preview: '', data: '' })
+    const [image, setImage] = useState(null)
+    const [vid, setvid] = useState(null)
+    const [imageurl, setImageurl] = useState()
+    const [imagepro, setImagepro] = useState()
+    const [vidurl, setvidurl] = useState()
     useEffect(() => {
          setcaseID(props.ID)
          setRepoterid(props.User)
@@ -51,15 +59,58 @@ const handleupdat=async ()=>{
   console.log("\n", "CNIC" , cdata.Cnic)
 
 }
+
+const Uploadimge=(item)=>{
+   item.forEach(element => {
+       const uploadTask=storage.ref(`/item/${element.file.name}`).put(element);
+       uploadTask.on('state_changed', 
+  (snapshot) => {
+    // Observe state change events such as progress, pause, and resume
+    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+    var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    setImagepro(JSON.stringify(progress))
+    setUploadedimg(1)
+    console.log('Upload is ' + progress + '% done');
+    
+  }, 
+  (error) => {
+    // Handle unsuccessful uploads
+  }, 
+  () => {
+    // Handle successful uploads on complete
+    // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+    uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+        JSON.stringify(downloadURL)
+        console.log('File available at', downloadURL);
+        setImageurl(downloadURL)
+        console.log('File available at image',  imageurl);
+        
+
+    });
+  }
+);
+   });
+}
 const handleImageInputChange = e => {
-     const img = {
-      preview: URL.createObjectURL(e.target.files[0]),
-      data: e.target.files[0],
-    }
-    setImage(img)
-    console.log(image)
+        console.log("____________________1")
+        Uploadimge([
+        {file:e.target.files[0] , label: "img"},
+        ])
+        // setImage(e.target.files[0])
+        // console.log(image)
+        // setUploadedimg(1)
+}
+
+// const handleuploadImage = e => {
+//     //  const img = {
+//     //   preview: URL.createObjectURL(e.target.files[0]),
+//     //   data: e.target.files[0],
+//     // }
+//     // setImage(img)
+//     // console.log(image)
+//     alert(" Image added successfully!")
          
-  };
+//   };
 
 const Addimage = () => {
     return(
@@ -67,19 +118,20 @@ const Addimage = () => {
         <div style={{display: 'flex', marginTop: "10px"}}>
             <div >
             <label htmlFor="contained-button-file">
-                <Input accept="image/*,video/*" id="contained-button-file" multiple type="file" onChange={handleImageInputChange} />
+                <Input accept="image/*" id="contained-button-file"   multiple type="file" onChange={handleImageInputChange} />
             </label>
              <>
-                <Typography style={{opacity: '0.6', marginTop:'-10px'}}> You can selete multiple files </Typography> 
+                <Typography style={{opacity: '0.6', marginTop:'-10px'}}> You can selete multiple Image files </Typography> 
              </>
             </div>
+            
+            {Uploadedimg==1?(
             <div htmlFor="contained-button-file">
-                <Button variant="contained" color="primary" style={{fontSize: '20px' , marginLeft: "30px" ,marginTop: "10px"}}
-                onClick={handleupdat()}
-                 >
+                <Button variant="contained" color="primary" style={{fontSize: '20px' , marginLeft: "30px" ,marginTop: "10px"}} >
                         Upload
                 </Button>
             </div>
+            ): ""}
         </div>
         </div>
     )
@@ -91,18 +143,19 @@ const Addvideo = () => {
         <div style={{display: 'flex', marginTop: "10px"}}>
             <div >
             <label htmlFor="contained-button-file">
-                <Input accept="image/*,video/*" id="contained-button-file" multiple type="file" onChange={handleImageInputChange} />
+                <Input accept="video/*" id="contained-button-file" multiple type="file"  />
             </label>
             <>
-             <Typography style={{opacity: '0.6', marginTop:'-10px'}}> You can selete multiple files </Typography> 
+             <Typography style={{opacity: '0.6', marginTop:'-10px'}}> You can selete multiple video files </Typography> 
              </>
             </div>
+            {Uploadedvid>=1?(
             <div htmlFor="contained-button-file">
-                <Button variant="contained" color="primary" style={{fontSize: '20px' , marginLeft: "30px" ,marginTop: "10px"}} 
-                >
+                <Button variant="contained" color="primary" style={{fontSize: '20px' , marginLeft: "30px" ,marginTop: "10px"}}>
                         Upload
                 </Button>
             </div>
+            ): ""}
         </div>
         </div>
     )
@@ -112,15 +165,26 @@ return(
     <>
     <div style={{display: 'flex' , justifyContent: "space-between"}}>
          
-        <div  style={{marginLeft: '300px'}}>
+        <div  style={{marginRight: '30px'}}>
         <Button
             variant="contained"
             color="primary"
             style={{marginLeft: '10px' , marginTop: "15px" ,fontSize: 20 ,borderRadius: '12px'}}
             endIcon={<AddIcon />}
             onClick={()=>setopenvideo(true)}
-        >  Add Image/Video  
+        >  Add Video  
         </Button>
+        </div>
+        <div  style={{marginLeft: '30px'}}>
+        <Button
+            variant="contained"
+            color="primary"
+            style={{marginLeft: '10px' , marginTop: "15px" ,fontSize: 20 ,borderRadius: '12px'}}
+            endIcon={<AddIcon />}
+            onClick={()=>setopenImage(true)}
+        >  Add Image  
+        </Button>
+        
         </div>
     </div>
     <div >

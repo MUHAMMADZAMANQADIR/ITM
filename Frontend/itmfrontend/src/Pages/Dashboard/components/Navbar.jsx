@@ -64,7 +64,7 @@ const Navbar = () => {
         <img src={icon} className={classes.logoLg}/>
         <div className={classes.icons}>
             <div className={classes.notificationtogglebtn} style={{marginRight: "15px", marginTop: "5px" }}>
-            <Notification />
+            {/* <Notification /> */}
             </div>
                 <Avatar
                   alt="Remy Sharp"

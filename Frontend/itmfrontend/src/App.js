@@ -34,7 +34,6 @@ function App() {
           <Route exact path="/updatecase" element={<IdProvider><InvesContextProvider><Updatespecificcase/></InvesContextProvider></IdProvider>}></Route>
           <Route exact path="/criminaldata" element={<InvesContextProvider><Searching/></InvesContextProvider>}></Route>
           <Route exact path="/similarcrime" element={<IdProvider><InvesContextProvider><Similarcrime/></InvesContextProvider></IdProvider>}></Route>
-          
           <Route exact path="/logout" element={<Stpage/>}></Route>
            
            
