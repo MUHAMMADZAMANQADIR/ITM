@@ -11,7 +11,7 @@ import TextField from '@mui/material/TextField';
 
  
 const AddTestimony=(props)=>{
-    const [bayans, setBayans] = useState([{ Name: " ", Bayan: " " }]);
+    const [bayans, setBayans] = useState([]);
     const {Investeam, error} = useContext(investigationContext)
     //const [Bayans , setBayans]=useState([{}]) 
     
@@ -21,6 +21,7 @@ const AddTestimony=(props)=>{
     const [reportType , setReportType]=useState("")
     const [Nameofperson , setNameofperson]=useState("") 
     const [Bayanofperson , setBayanofperson]=useState("") 
+    const [count , setcount]=useState(1)
     useEffect(() => {
          setcaseID(props.ID)
          setRepoterid(props.User)
@@ -29,8 +30,9 @@ const AddTestimony=(props)=>{
      
      const handleupdat=()=>{
          console.log("Investeam - id" , Investeam._id)
-         if(bayans.length>1){
-            const Bayans = bayans.slice(1, bayans.lenght);            
+         if(bayans.length>0 || DetailedDescription){
+            const investid= Investeam._id;
+            const Bayans = bayans;            
             const detailedDescription =DetailedDescription
             console.log(Bayans)
             const caseID = CaseID 
@@ -39,9 +41,9 @@ const AddTestimony=(props)=>{
             console.log(0.1)
             const ReportType= reportType
             console.log(1)
-            const body = JSON.stringify({ Bayans, caseID , detailedDescription , Repoterid , ReportType})
+            const body =  {Bayans, caseID , detailedDescription , Repoterid , ReportType}
              
-            console.log(body);
+            console.log("Add Testimony" ,body);
             const config = {
                 headers: {
                     'Content-Type':'application/json'
@@ -55,32 +57,40 @@ const AddTestimony=(props)=>{
             })
             .catch((error) => console.log(error));
        
-     }}
+     }
+        
+    }
       
    
  
 // handle click event of the Remove button
-const handleRemoveClick = index => {
-  const list = [...bayans];
-  list.splice(index, 1);
-  setBayans(list);
-};
+// const handleRemoveClick =() => {
+//   const list = [...bayans];
+//   list.splice(bayans.length, 1);
+//   setBayans(list);
+// };
  
 // handle click event of the Add button
 const handleAddClick = () => {
-  setBayans([...bayans, { Name: Nameofperson , Bayan: Bayanofperson }]);
-  console.log("Now" , bayans)
+   console.log("Name" , Nameofperson)
+   let obj={Name: Nameofperson ,Bayan: Bayanofperson }
+   console.log(obj, "object")
+   bayans.push(obj) 
+   console.log("Now" , bayans)
+   alert("Added successfully!")
+   setcount(count+1)
+};
+const handleName = e => {
+        setNameofperson(e.target.value);
+        console.log(Nameofperson)
+};
+const handleBayan = event => {
+        setBayanofperson(event.target.value);
+        console.log(Bayanofperson)
 };
 const Addperson =(props)=>{
 
-    const handleName = e => {
-        setNameofperson(e.target.value);
-        console.log(Nameofperson)
-    };
-    const handleBayan = event => {
-        setBayanofperson(event.target.value);
-        console.log(Bayanofperson)
-    };
+   
     return(
        <form  className='report__form'>
         <div>
@@ -109,8 +119,8 @@ const Addperson =(props)=>{
                 
         </div>
         <div >          
-              {bayans.length !== 1 && <Button variant="contained" color="primary" style={{ marginRight: "-15px" ,marginTop: "10px"}} onClick={() => handleRemoveClick(props.count)} >Remove Person</Button>}
-              {bayans.length - 1 === props.count && <Button variant="contained" color="primary" style={{marginLeft: "20px" ,marginTop: "10px"}} onClick={handleAddClick} >Add Person</Button> }
+              <Button variant="contained" color="primary" style={{ marginRight: "-15px" ,marginTop: "10px"}} onClick={() => {setcount(count+1)}} >Remove Person</Button>
+              <Button variant="contained" color="primary" style={{marginLeft: "20px" ,marginTop: "10px"}} onClick={handleAddClick} >Add</Button> 
             </div>
         </div>
        </form>
@@ -121,10 +131,14 @@ const handledetailedDescriptionInput = event => {
         setdetailedDescription(event.target.value);
         console.log(DetailedDescription)
 };
+const handlePreviousRecordedBayan=()=> {
+         console.log("qwe")
+};
 return(
         <form className='report__form'>
             <div>
-             <label htmlFor="description">Add detailed Description <span><AiFillStar className='report-icon'/></span> </label>
+             <label htmlFor="description">Add detailed Description 
+              </label>
                 <textarea
                     name="details"
                     rows="7" cols="10"
@@ -133,10 +147,30 @@ return(
                     onChange={handledetailedDescriptionInput} 
                 />
             </div>
+            <div>
+             <label htmlFor="description">Previous Recorded Bayan</label>
+                <textarea
+                    disabled
+                    readonly
+                    name="details"
+                    rows="7" cols="10"
+                    minLength= "100"
+                    maxLength='1000' 
+                    value={bayans}
+                />
+            </div>
         <div>
          
         <Grid item sm={7} xs={10}>
+        <Button variant="contained" color="primary" style={{marginLeft: "20px" ,marginTop: "10px"}} onClick={() => {setcount(count+1)
+        console.log("count" , count)
+        }} >Add Person</Button> 
         {
+            count % 2 == 0 ? <Addperson/> :""
+        }
+        
+        
+        {/* {
             bayans.map((news ,count)=>{
               return(
                 <Grid key={news.key} sm={6} xs={12}>
@@ -152,7 +186,7 @@ return(
         },
         {
             console.log(bayans)
-        }    
+        }     */}
             
         </Grid>
         <form className='report__form'>

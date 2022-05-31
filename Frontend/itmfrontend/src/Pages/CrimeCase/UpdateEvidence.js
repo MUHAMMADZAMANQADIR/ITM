@@ -18,19 +18,20 @@ const Input = styled('input')({
   display: 'none',
 });
 const  UpdateEvidence=(props)=>{
-    const [openImage, setopenImage] = useState(false);
-    const [openvideo, setopenvideo] = useState(false);
+    const [openImage, setopenImage] = useState(false);//to open image input
+    const [openvideo, setopenvideo] = useState(false);//to open video input
     const [CaseID , setcaseID]=useState("") 
     const [repoterid , setRepoterid]=useState("") 
     const [reportType , setReportType]=useState("")
-    const [Uploadedimg, setUploadedimg]=useState(0)
-    const [Uploadedvid, setUploadedvid]=useState(0)
+    const [Uploadedimg, setUploadedimg]=useState(0)//for button
+    const [Uploadedvid, setUploadedvid]=useState(0)//for button
     const {Investeam, error} = useContext(investigationContext)
     const [image, setImage] = useState(null)
     const [vid, setvid] = useState(null)
-    const [imageurl, setImageurl] = useState()
-    const [imagepro, setImagepro] = useState()
-    const [vidurl, setvidurl] = useState()
+    const [imageurl, setImageurl] = useState()//img url
+    const [imagepro, setImagepro] = useState()//img progress
+    const [vidurl, setvidurl] = useState()//video url
+    const [vidpro, setvidpro] = useState()//video progress
     useEffect(() => {
          setcaseID(props.ID)
          setRepoterid(props.User)
@@ -39,25 +40,29 @@ const  UpdateEvidence=(props)=>{
  
 const handleupdat=async ()=>{
     console.log("Now in updateEvidence");
-    let formData = new FormData()
+    if(imageurl || vidurl){
     const caseID = CaseID 
     const Repoterid= repoterid
     const ReportType= reportType
     const id=Investeam._id
-    formData.append('Files', image.data)
-    console.log("oooo" , formData)
+    const VFiles=vidurl
+    const IFiles=imageurl
+    const body ={VFiles,IFiles,caseID,Repoterid,ReportType}
+    console.log(body)
+    const config = {
+        headers: {
+            'Content-Type':'application/json'
+        }
+      }
+      let url = `http://localhost:5000/api/updatedReported/updatedReport/${Investeam._id}`;
+      axios
+      .post(url,body,config)
+      .then(function (response) {
+              console.log("res", response.data)
+       })
+      .catch((error) => alert(error));
+  }
   
-    const body =JSON.stringify( {formData , caseID , Repoterid , ReportType})
-    let res=await fetch('http://localhost:5000/api/updatedReported/updatedReport/?'+id, {
-    method: 'POST',
-    body: body,
-    })
-
-  let cdata = await res.text();
-  cdata=JSON.parse(cdata)
-  console.log("HI I AM DATA",typeof(cdata) ,cdata)
-  console.log("\n", "CNIC" , cdata.Cnic)
-
 }
 
 const Uploadimge=(item)=>{
@@ -74,7 +79,7 @@ const Uploadimge=(item)=>{
     
   }, 
   (error) => {
-    // Handle unsuccessful uploads
+    alert(error)
   }, 
   () => {
     // Handle successful uploads on complete
@@ -82,7 +87,7 @@ const Uploadimge=(item)=>{
     uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
         JSON.stringify(downloadURL)
         console.log('File available at', downloadURL);
-        setImageurl(downloadURL)
+        setImageurl({url: downloadURL})
         console.log('File available at image',  imageurl);
         
 
@@ -101,16 +106,59 @@ const handleImageInputChange = e => {
         // setUploadedimg(1)
 }
 
-// const handleuploadImage = e => {
-//     //  const img = {
-//     //   preview: URL.createObjectURL(e.target.files[0]),
-//     //   data: e.target.files[0],
-//     // }
-//     // setImage(img)
-//     // console.log(image)
-//     alert(" Image added successfully!")
+const handleVideoInputChange = e => {
+        console.log("____________________1")
+        Uploadvideo([
+        {file:e.target.files[0] , label: "vid"},
+        ])
+        // setImage(e.target.files[0])
+        // console.log(image)
+        // setUploadedimg(1)
+}
+
+const Uploadvideo=(item)=>{
+   item.forEach(element => {
+       const uploadTask=storage.ref(`/item/${element.file.name}`).put(element);
+       uploadTask.on('state_changed', 
+  (snapshot) => {
+    // Observe state change events such as progress, pause, and resume
+    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+    var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    setvidpro(JSON.stringify(progress))
+    setUploadedvid(1)
+    console.log('Upload is ' + progress + '% done');
+    
+  }, 
+  (error) => {
+    alert(error)
+  }, 
+  () => {
+    // Handle successful uploads on complete
+    // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+    uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+        JSON.stringify(downloadURL)
+        console.log('File available at', downloadURL);
+        setvidurl({url: downloadURL})
+        console.log('File available at video',  vidurl);
+        
+
+    });
+  }
+);
+   });
+}
+
+const handleupload = e => {
+    //  const img = {
+    //   preview: URL.createObjectURL(e.target.files[0]),
+    //   data: e.target.files[0],
+    // }
+    // setImage(img)
+    // console.log(image)
+    if(Uploadedimg==1 || Uploadedvid==1 ){
+    alert("File added successfully!")}
          
-//   };
+  };
 
 const Addimage = () => {
     return(
@@ -127,7 +175,7 @@ const Addimage = () => {
             
             {Uploadedimg==1?(
             <div htmlFor="contained-button-file">
-                <Button variant="contained" color="primary" style={{fontSize: '20px' , marginLeft: "30px" ,marginTop: "10px"}} >
+                <Button variant="contained" color="primary" style={{fontSize: '20px' , marginLeft: "30px" ,marginTop: "10px"}} onClick={handleupload} >
                         Upload
                 </Button>
             </div>
@@ -143,15 +191,15 @@ const Addvideo = () => {
         <div style={{display: 'flex', marginTop: "10px"}}>
             <div >
             <label htmlFor="contained-button-file">
-                <Input accept="video/*" id="contained-button-file" multiple type="file"  />
+                <Input accept="video/*" id="contained-button-file" multiple type="file"  onChange={handleVideoInputChange} />
             </label>
             <>
              <Typography style={{opacity: '0.6', marginTop:'-10px'}}> You can selete multiple video files </Typography> 
              </>
             </div>
-            {Uploadedvid>=1?(
+            {Uploadedvid==1?(
             <div htmlFor="contained-button-file">
-                <Button variant="contained" color="primary" style={{fontSize: '20px' , marginLeft: "30px" ,marginTop: "10px"}}>
+                <Button variant="contained" color="primary" style={{fontSize: '20px' , marginLeft: "30px" ,marginTop: "10px"}} onClick={handleupload}>
                         Upload
                 </Button>
             </div>

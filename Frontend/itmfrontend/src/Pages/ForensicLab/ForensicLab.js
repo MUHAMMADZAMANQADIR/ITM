@@ -5,7 +5,7 @@ import Leftbar from "../Dashboard/components/Leftbar";
 import Navbar from "../Dashboard/components/Navbar";
 import Rightbar from "../Dashboard/components/Rightbar";
 import Footer from "../Footer/Footer"
- 
+import Lab from "./lab"
 import {Link} from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
   right: {
@@ -25,7 +25,9 @@ const ForensicLab = () => {
           <Leftbar />
         </Grid>
         <Grid sm={7} xs={10}>
-            
+        <div style={{marginTop: "80px"}}>
+            <Lab />
+        </div>
         </Grid>
         <Grid item sm={3} className={classes.right}>
           <Rightbar />

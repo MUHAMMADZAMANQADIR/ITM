@@ -26,6 +26,7 @@
     "@rpldy/uploady": "^0.18.1",
     "@syncfusion/ej2-react-calendars": "^19.4.56",
     "@syncfusion/ej2-react-dropdowns": "^19.4.56",
+    "@tensorflow/tfjs-node": "^3.18.0",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",

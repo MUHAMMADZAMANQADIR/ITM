@@ -72,7 +72,7 @@ const Genratereport=(props)=>{
                 headers: {
                             'Content-Type':'application/json'
                 }}
-                let url = `http://localhost:5000/api/updatedReported/updatecase`;
+                let url = `http://localhost:5000/api/updatedReported/updatecase/${Investeam._id}`;
                 axios.post(url,body,config)
                 .then(function (response) {
                  console.log(response.data)   
