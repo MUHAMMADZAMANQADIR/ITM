@@ -11,7 +11,9 @@ import {
 import { Cancel, Mail, Notifications, Search } from "@material-ui/icons";
 import Notification from "../../Notifications/Notification"
 import { useState } from "react";
+import Logo from './Boy.png';
 const icon= process.env.PUBLIC_URL + '/assets/icon.png'
+
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     display: "flex",
@@ -67,8 +69,7 @@ const Navbar = () => {
              <Notification /> 
             </div>
                 <Avatar
-                  alt="Remy Sharp"
-                  src="https://images.pexels.com/photos/8647814/pexels-photo-8647814.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                  src={Logo}
                 />
         </div>
       </Toolbar>

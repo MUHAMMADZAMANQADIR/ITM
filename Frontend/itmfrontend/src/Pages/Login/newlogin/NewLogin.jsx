@@ -43,7 +43,8 @@ function NewLogin() {
             navigate("/dashboard");
         } catch (err) {
             dispatch({ type: "LOGIN_FAILURE", payload:err})
-            console.log(err)
+            alert("Invalid credentials");
+            
         }
     }
  
@@ -60,7 +61,7 @@ function NewLogin() {
         />
         <input
           className="input"
-          type="text" placeholder="Password"
+          type="password" placeholder="Password"
           onChange={handlePasswordInput}
         />
   
