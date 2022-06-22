@@ -211,10 +211,7 @@ const FIR=()=>{
 const Reporterinformation=()=>{
    return(
       <form className='report__form'>
-            <div style={{width: 200, height: 200, borderRadius: 4, marginLeft:150 , marginTop:7 , marginBottom:5}} >
-              <Image   src="http://loremflickr.com/300/200" />
-
-            </div>
+             
             <div>
             <label htmlFor="name">Reporter Name <span><AiFillStar className='report-icon'/></span> </label>
               <input

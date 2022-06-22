@@ -24,7 +24,7 @@ function NewLogin() {
   };
   const handleLogin = async (e) => {
         
-        e.preventDefault()
+     
         const UserName = Username 
         const Password = UserPassword 
         const body = JSON.stringify( { UserName, Password })
